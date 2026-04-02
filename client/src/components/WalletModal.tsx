@@ -58,8 +58,8 @@ export default function WalletModal({ open, onClose }: WalletModalProps) {
   const { t } = useLanguage();
 
   const handleConnect = (walletId: string, walletName: string) => {
-    toast.info(`${walletName} — Feature coming soon`, {
-      description: 'Wallet connection will be available after mainnet launch',
+    toast.info(`${walletName} — ${t('wallet.comingSoon')}`, {
+      description: t('wallet.comingSoonDesc'),
     });
     onClose();
   };

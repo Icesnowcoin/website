@@ -106,6 +106,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     'wallet.metamask': 'MetaMask',
     'wallet.trustwallet': 'Trust Wallet',
     'wallet.walletconnect': 'WalletConnect',
+    'wallet.comingSoon': '即将开放',
+    'wallet.comingSoonDesc': '预售期间暂未开放，敬请期待',
   },
 
   en: {
@@ -204,6 +206,8 @@ export const translations: Record<Locale, Record<string, string>> = {
     'wallet.metamask': 'MetaMask',
     'wallet.trustwallet': 'Trust Wallet',
     'wallet.walletconnect': 'WalletConnect',
+    'wallet.comingSoon': 'Coming Soon',
+    'wallet.comingSoonDesc': 'Not available during presale period, stay tuned',
   },
 
   vi: {
@@ -302,5 +306,7 @@ export const translations: Record<Locale, Record<string, string>> = {
     'wallet.metamask': 'MetaMask',
     'wallet.trustwallet': 'Trust Wallet',
     'wallet.walletconnect': 'WalletConnect',
+    'wallet.comingSoon': 'Sắp mở',
+    'wallet.comingSoonDesc': 'Chưa khả dụng trong giai đoạn bán trước, hãy chờ đón',
   },
 };
