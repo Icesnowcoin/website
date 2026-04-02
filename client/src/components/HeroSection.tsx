@@ -1,0 +1,194 @@
+/*
+ * Design: Quantum Ice — Hero section with presale countdown
+ * Full viewport, background image with overlay, key stats
+ */
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { ArrowRight, Clock, Zap } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { ASSETS, LINKS } from '@/lib/assets';
+
+function CountdownTimer({ targetDate }: { targetDate: Date }) {
+  const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+  useEffect(() => {
+    const tick = () => {
+      const now = new Date().getTime();
+      const diff = targetDate.getTime() - now;
+      if (diff <= 0) {
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+        return;
+      }
+      setTimeLeft({
+        days: Math.floor(diff / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((diff / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((diff / (1000 * 60)) % 60),
+        seconds: Math.floor((diff / 1000) % 60),
+      });
+    };
+    tick();
+    const interval = setInterval(tick, 1000);
+    return () => clearInterval(interval);
+  }, [targetDate]);
+
+  const units = [
+    { value: timeLeft.days, label: 'D' },
+    { value: timeLeft.hours, label: 'H' },
+    { value: timeLeft.minutes, label: 'M' },
+    { value: timeLeft.seconds, label: 'S' },
+  ];
+
+  return (
+    <div className="flex gap-2 sm:gap-3">
+      {units.map((unit, i) => (
+        <div key={i} className="flex flex-col items-center">
+          <div className="w-14 h-14 sm:w-16 sm:h-16 glass-card rounded-lg flex items-center justify-center border-glow">
+            <span className="text-xl sm:text-2xl font-bold text-ice-blue" style={{ fontFamily: 'var(--font-mono)' }}>
+              {String(unit.value).padStart(2, '0')}
+            </span>
+          </div>
+          <span className="text-[10px] mt-1 text-muted-foreground" style={{ fontFamily: 'var(--font-mono)' }}>
+            {unit.label}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+export default function HeroSection() {
+  const { t } = useLanguage();
+  const presaleDate = new Date('2026-04-20T00:00:00Z');
+
+  const stats = [
+    { label: t('hero.totalSupply'), value: '202,600,000', unit: 'ISC' },
+    { label: t('hero.presalePrice'), value: '1 USDT', unit: '= 20 ISC' },
+    { label: t('hero.chain'), value: 'BSC', unit: 'BEP-20' },
+  ];
+
+  return (
+    <section id="hero" className="relative min-h-screen flex items-center overflow-hidden pt-16">
+      {/* Background */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src={ASSETS.heroBg}
+          alt=""
+          className="w-full h-full object-cover opacity-40"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[oklch(0.10_0.02_250/0.3)] via-transparent to-[oklch(0.10_0.02_250)]" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[oklch(0.10_0.02_250/0.6)] to-transparent" />
+      </div>
+
+      <div className="relative z-10 container mx-auto py-16 sm:py-24">
+        <div className="max-w-3xl">
+          {/* Presale Badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[oklch(0.75_0.12_220/0.3)] bg-[oklch(0.75_0.12_220/0.08)] mb-6"
+          >
+            <Clock className="w-3.5 h-3.5 text-ice-blue" />
+            <span className="text-xs font-medium text-ice-blue" style={{ fontFamily: 'var(--font-sub)' }}>
+              {t('hero.presale')} — {t('hero.presaleDate')}
+            </span>
+          </motion.div>
+
+          {/* Title */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.8 }}
+          >
+            <h1
+              className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight text-glow"
+              style={{ fontFamily: 'var(--font-heading)', color: 'oklch(0.95 0.02 220)' }}
+            >
+              ICE SNOW COIN
+            </h1>
+            <p
+              className="mt-3 text-lg sm:text-xl lg:text-2xl font-light"
+              style={{ fontFamily: 'var(--font-sub)', color: 'oklch(0.75 0.08 220)' }}
+            >
+              {t('hero.subtitle')}
+            </p>
+          </motion.div>
+
+          {/* Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.5 }}
+            className="mt-5 text-sm sm:text-base leading-relaxed max-w-2xl"
+            style={{ fontFamily: 'var(--font-body)', color: 'oklch(0.65 0.02 220)' }}
+          >
+            {t('hero.description')}
+          </motion.p>
+
+          {/* Countdown */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.6 }}
+            className="mt-8"
+          >
+            <CountdownTimer targetDate={presaleDate} />
+          </motion.div>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.7 }}
+            className="mt-8 flex flex-wrap gap-3"
+          >
+            <a
+              href={LINKS.pancakeswap}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-ice-blue text-[oklch(0.10_0.02_250)] font-semibold text-sm hover:bg-electric-cyan transition-all duration-300 border-glow"
+              style={{ fontFamily: 'var(--font-heading)' }}
+            >
+              <Zap className="w-4 h-4" />
+              {t('hero.buyNow')}
+            </a>
+            <a
+              href="#about"
+              onClick={(e) => { e.preventDefault(); document.querySelector('#about')?.scrollIntoView({ behavior: 'smooth' }); }}
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-[oklch(0.75_0.12_220/0.3)] text-ice-blue font-medium text-sm hover:bg-[oklch(0.75_0.12_220/0.1)] transition-all duration-300"
+              style={{ fontFamily: 'var(--font-heading)' }}
+            >
+              {t('hero.learnMore')}
+              <ArrowRight className="w-4 h-4" />
+            </a>
+          </motion.div>
+
+          {/* Stats */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9 }}
+            className="mt-12 grid grid-cols-3 gap-4 max-w-lg"
+          >
+            {stats.map((stat, i) => (
+              <div key={i} className="text-center sm:text-left">
+                <div className="text-xs text-muted-foreground mb-1" style={{ fontFamily: 'var(--font-sub)' }}>
+                  {stat.label}
+                </div>
+                <div className="text-sm sm:text-base font-bold text-foreground" style={{ fontFamily: 'var(--font-mono)' }}>
+                  {stat.value}
+                </div>
+                <div className="text-xs text-ice-blue" style={{ fontFamily: 'var(--font-mono)' }}>
+                  {stat.unit}
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-10" />
+    </section>
+  );
+}
