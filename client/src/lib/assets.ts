@@ -3,7 +3,7 @@
 
 export const ASSETS = {
   // Logo
-  logo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663391784042/iTwaQ7bCqttWKZ88a3EUgj/512像素_794edc2c.jpg',
+  logo: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663391784042/iTwaQ7bCqttWKZ88a3EUgj/512像素_794edc2c.jpg', // ISC Snowflake Logo
 
   // Background Images
   heroBg: 'https://d2xsxph8kpxj0f.cloudfront.net/310519663391784042/iTwaQ7bCqttWKZ88a3EUgj/hero-bg-S8StdBMwL2SNhjx3jgTN9w.webp',
@@ -25,7 +25,7 @@ export const LINKS = {
   game: 'https://icesnowcoin.it.com',
   community: 'https://x.com/i/communities/2035804297032761471',
   twitter: 'https://x.com/IceSnowCoin',
-  pancakeswap: 'https://pancakeswap.finance/swap?outputCurrency=0x90C0159195eF47AFb63f7d65085FA19c6cafa9cb',
-  contract: '0x90C0159195eF47AFb63f7d65085FA19c6cafa9cb',
-  bscscan: 'https://bscscan.com/token/0x90C0159195eF47AFb63f7d65085FA19c6cafa9cb',
+  pancakeswap: 'https://pancakeswap.finance/swap?outputCurrency=0x11229a3f976566FA8a3ba462C432122f3B8876f6',
+  contract: '0x11229a3f976566FA8a3ba462C432122f3B8876f6',
+  bscscan: 'https://bscscan.com/token/0x11229a3f976566FA8a3ba462C432122f3B8876f6',
 } as const;
