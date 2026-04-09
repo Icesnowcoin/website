@@ -158,7 +158,7 @@ export default function TokenomicsSection() {
         {/* Key Metrics */}
         <motion.div {...fadeInUp} className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
           {[
-            { label: t('tokenomics.presalePrice'), value: '1 USDT = 20 ISC' },
+            { label: t('tokenomics.presalePrice'), value: '1 USDT = 2000 ISC' },
             { label: t('tokenomics.hardCap'), value: '$500,000' },
             { label: t('tokenomics.softCap'), value: '$80,000' },
             { label: t('tokenomics.audit'), value: 'CertiK & OpenZeppelin' },
