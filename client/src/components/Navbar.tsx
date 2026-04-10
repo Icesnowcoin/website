@@ -8,13 +8,13 @@ import { Menu, X, Globe, Wallet, ExternalLink, ChevronDown } from 'lucide-react'
 import { useLanguage } from '@/contexts/LanguageContext';
 import { type Locale, LOCALE_NAMES } from '@/lib/i18n';
 import { ASSETS, LINKS } from '@/lib/assets';
-import WalletModal from './WalletModal';
+
 
 export default function Navbar() {
   const { t, locale, setLocale } = useLanguage();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
-  const [walletOpen, setWalletOpen] = useState(false);
+
 
   const navItems = [
     { label: t('nav.home'), href: '#hero' },
@@ -121,14 +121,16 @@ export default function Navbar() {
             </a>
 
             {/* Wallet Button */}
-            <button
-              onClick={() => setWalletOpen(true)}
+            <a
+              href={LINKS.pancakeswap}
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold rounded-lg bg-ice-blue text-[oklch(0.10_0.02_250)] hover:bg-electric-cyan transition-all duration-300 border-glow"
               style={{ fontFamily: 'var(--font-heading)' }}
             >
               <Wallet className="w-4 h-4" />
               <span className="hidden sm:inline">{t('nav.connectWallet')}</span>
-            </button>
+            </a>
 
             {/* Mobile Menu Toggle */}
             <button
@@ -184,9 +186,6 @@ export default function Navbar() {
           )}
         </AnimatePresence>
       </nav>
-
-      {/* Wallet Modal */}
-      <WalletModal open={walletOpen} onClose={() => setWalletOpen(false)} />
 
       {/* Close language dropdown on outside click */}
       {langOpen && (
