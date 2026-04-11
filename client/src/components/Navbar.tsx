@@ -4,10 +4,11 @@
  */
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Globe, Wallet, ExternalLink, ChevronDown } from 'lucide-react';
+import { Menu, X, Globe, ExternalLink, ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { type Locale, LOCALE_NAMES } from '@/lib/i18n';
 import { ASSETS, LINKS } from '@/lib/assets';
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 
 export default function Navbar() {
@@ -120,17 +121,10 @@ export default function Navbar() {
               <ExternalLink className="w-3 h-3" />
             </a>
 
-            {/* Wallet Button */}
-            <a
-              href={LINKS.pancakeswap}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-semibold rounded-lg bg-ice-blue text-[oklch(0.10_0.02_250)] hover:bg-electric-cyan transition-all duration-300 border-glow"
-              style={{ fontFamily: 'var(--font-heading)' }}
-            >
-              <Wallet className="w-4 h-4" />
-              <span className="hidden sm:inline">{t('nav.connectWallet')}</span>
-            </a>
+            {/* Wallet Connect Button */}
+            <div className="hidden sm:block">
+              <ConnectButton />
+            </div>
 
             {/* Mobile Menu Toggle */}
             <button
