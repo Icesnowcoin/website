@@ -17,10 +17,11 @@ const fadeInUp = {
 };
 
 function DonutChart() {
-  // 60% team, 40% market (10% presale within market)
+  // v2.0: 20% team, 30% operations, 40% market, 10% APY rewards
   const segments = [
-    { percent: 60, color: 'oklch(0.55 0.18 255)', label: '60%' },
+    { percent: 20, color: 'oklch(0.55 0.18 255)', label: '20%' },
     { percent: 30, color: 'oklch(0.75 0.12 220)', label: '30%' },
+    { percent: 40, color: 'oklch(0.68 0.15 200)', label: '40%' },
     { percent: 10, color: 'oklch(0.82 0.16 195)', label: '10%' },
   ];
 
@@ -54,7 +55,7 @@ function DonutChart() {
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ delay: 0.3 + i * 0.2, duration: 0.8 }}
+            transition={{ delay: 0.3 + i * 0.15, duration: 0.8 }}
             style={{ filter: `drop-shadow(0 0 6px ${seg.color})` }}
           />
         );
@@ -82,9 +83,10 @@ export default function TokenomicsSection() {
   };
 
   const allocations = [
-    { color: 'oklch(0.55 0.18 255)', label: t('tokenomics.team'), percent: '60%', amount: '121,560,000', desc: t('tokenomics.teamDesc'), icon: <Lock className="w-4 h-4" /> },
-    { color: 'oklch(0.75 0.12 220)', label: t('tokenomics.market'), percent: '30%', amount: '60,780,000', desc: t('tokenomics.marketDesc'), icon: <TrendingUp className="w-4 h-4" /> },
-    { color: 'oklch(0.82 0.16 195)', label: t('tokenomics.presale'), percent: '10%', amount: '20,260,000', desc: t('tokenomics.presaleDesc'), icon: <Shield className="w-4 h-4" /> },
+    { color: 'oklch(0.55 0.18 255)', label: t('tokenomics.team'), percent: '20%', amount: '40,520,000', desc: t('tokenomics.teamDesc'), icon: <Lock className="w-4 h-4" /> },
+    { color: 'oklch(0.75 0.12 220)', label: t('tokenomics.operations'), percent: '30%', amount: '60,780,000', desc: t('tokenomics.operationsDesc'), icon: <TrendingUp className="w-4 h-4" /> },
+    { color: 'oklch(0.68 0.15 200)', label: t('tokenomics.market'), percent: '40%', amount: '81,040,000', desc: t('tokenomics.marketDesc'), icon: <TrendingUp className="w-4 h-4" /> },
+    { color: 'oklch(0.82 0.16 195)', label: t('tokenomics.apy'), percent: '10%', amount: '20,260,000', desc: t('tokenomics.apyDesc'), icon: <Shield className="w-4 h-4" /> },
   ];
 
   return (
@@ -108,7 +110,7 @@ export default function TokenomicsSection() {
         </motion.div>
 
         {/* Chart + Allocations */}
-        <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+        <div className="grid lg:grid-cols-2 gap-12 items-start mb-16">
           {/* Donut Chart */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
@@ -121,7 +123,7 @@ export default function TokenomicsSection() {
           </motion.div>
 
           {/* Allocation Details */}
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-3">
             {allocations.map((item, i) => (
               <motion.div
                 key={i}
@@ -129,24 +131,24 @@ export default function TokenomicsSection() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.15, duration: 0.6 }}
-                className="glass-card rounded-xl p-4 flex items-start gap-4 border-glow-hover transition-all duration-300"
+                className="glass-card rounded-xl p-3 flex items-start gap-3 border-glow-hover transition-all duration-300"
               >
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: `color-mix(in oklch, ${item.color}, transparent 85%)` }}>
+                <div className="w-9 h-9 rounded-lg flex items-center justify-center shrink-0" style={{ backgroundColor: `color-mix(in oklch, ${item.color}, transparent 85%)` }}>
                   <div style={{ color: item.color }}>{item.icon}</div>
                 </div>
-                <div className="flex-1">
-                  <div className="flex items-baseline justify-between">
-                    <h4 className="text-sm font-semibold" style={{ fontFamily: 'var(--font-heading)', color: 'oklch(0.88 0.03 220)' }}>
+                <div className="flex-1 min-w-0">
+                  <div className="flex items-baseline justify-between gap-2">
+                    <h4 className="text-xs font-semibold" style={{ fontFamily: 'var(--font-heading)', color: 'oklch(0.88 0.03 220)' }}>
                       {item.label}
                     </h4>
-                    <span className="text-lg font-bold" style={{ fontFamily: 'var(--font-mono)', color: item.color }}>
+                    <span className="text-sm font-bold shrink-0" style={{ fontFamily: 'var(--font-mono)', color: item.color }}>
                       {item.percent}
                     </span>
                   </div>
-                  <p className="text-xs mt-1" style={{ fontFamily: 'var(--font-mono)', color: 'oklch(0.55 0.02 220)' }}>
+                  <p className="text-xs mt-0.5" style={{ fontFamily: 'var(--font-mono)', color: 'oklch(0.55 0.02 220)' }}>
                     {item.amount} ISC
                   </p>
-                  <p className="text-xs mt-1" style={{ fontFamily: 'var(--font-body)', color: 'oklch(0.55 0.02 220)' }}>
+                  <p className="text-xs mt-0.5 leading-tight" style={{ fontFamily: 'var(--font-body)', color: 'oklch(0.55 0.02 220)' }}>
                     {item.desc}
                   </p>
                 </div>
