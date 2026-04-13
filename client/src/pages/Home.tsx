@@ -5,7 +5,7 @@
 import { useState, useCallback } from 'react';
 import Navbar from '@/components/Navbar';
 import ParticleField from '@/components/ParticleField';
-import HolographicIntroAnimation from '@/components/HolographicIntroAnimation';
+import ISCLogoIntroAnimation from '@/components/ISCLogoIntroAnimation';
 import HeroSection from '@/components/HeroSection';
 import CommunitySection from '@/components/CommunitySection';
 import AboutSection from '@/components/AboutSection';
@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <>
       {/* Intro Animation */}
-      {!introComplete && <HolographicIntroAnimation onComplete={handleIntroComplete} />}
+      {!introComplete && <ISCLogoIntroAnimation onComplete={handleIntroComplete} />}
 
       {/* Main Content */}
       <div className={introComplete ? 'opacity-100' : 'opacity-0'} style={{ transition: 'opacity 0.5s ease-in' }}>
