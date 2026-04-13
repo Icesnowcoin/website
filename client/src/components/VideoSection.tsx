@@ -4,7 +4,7 @@
  */
 import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Play, Volume2, VolumeX, Users } from 'lucide-react';
+import { Play, Volume2, VolumeX } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ASSETS, LINKS } from '@/lib/assets';
 
@@ -121,25 +121,7 @@ export default function VideoSection() {
           </div>
         </motion.div>
 
-        {/* CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="text-center mt-8"
-        >
-          <a
-            href={LINKS.community}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-ice-blue text-[oklch(0.10_0.02_250)] font-semibold text-sm hover:bg-electric-cyan transition-all duration-300 border-glow"
-            style={{ fontFamily: 'var(--font-heading)' }}
-          >
-            <Users className="w-4 h-4" />
-            {t('video.joinCommunity')}
-          </a>
-        </motion.div>
+
       </div>
     </section>
   );

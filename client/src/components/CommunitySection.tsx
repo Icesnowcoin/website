@@ -1,14 +1,61 @@
 /*
  * Design: Quantum Ice — Community section
- * Call-to-action for joining the ISC community
+ * Call-to-action for joining the ISC community with video
  */
+import { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Users, ArrowRight, MessageCircle, Globe, Zap } from 'lucide-react';
+import { Users, Play, Volume2, VolumeX } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { LINKS } from '@/lib/assets';
+import { ASSETS, LINKS } from '@/lib/assets';
 
 export default function CommunitySection() {
   const { t } = useLanguage();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [isMuted, setIsMuted] = useState(true);
+  const [hasInteracted, setHasInteracted] = useState(false);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    const video = videoRef.current;
+    if (!section || !video) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.play().then(() => setIsPlaying(true)).catch(() => {});
+        } else {
+          video.pause();
+          setIsPlaying(false);
+        }
+      },
+      { threshold: 0.4 }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
+  const toggleMute = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    video.muted = !video.muted;
+    setIsMuted(video.muted);
+    setHasInteracted(true);
+  };
+
+  const handlePlay = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      video.play().then(() => setIsPlaying(true));
+    } else {
+      video.pause();
+      setIsPlaying(false);
+    }
+    setHasInteracted(true);
+  };
 
   const communityFeatures = [
     {
@@ -17,19 +64,19 @@ export default function CommunitySection() {
       desc: t('community.feature1Desc') || '连接全球 ISC 爱好者',
     },
     {
-      icon: <MessageCircle className="w-6 h-6" />,
+      icon: <Users className="w-6 h-6" />,
       title: t('community.feature2') || '实时讨论',
       desc: t('community.feature2Desc') || '参与项目讨论和决策',
     },
     {
-      icon: <Zap className="w-6 h-6" />,
+      icon: <Users className="w-6 h-6" />,
       title: t('community.feature3') || '独家福利',
       desc: t('community.feature3Desc') || '获取社区专属奖励',
     },
   ];
 
   return (
-    <section id="community" className="relative py-24 sm:py-32 overflow-hidden">
+    <section ref={sectionRef} id="community" className="relative py-24 sm:py-32 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-gradient-to-b from-ice-blue/5 via-transparent to-transparent" />
@@ -60,13 +107,57 @@ export default function CommunitySection() {
           <div className="mt-4 mx-auto h-[1px] w-24 bg-gradient-to-r from-transparent via-ice-blue to-transparent" />
         </motion.div>
 
+        {/* Video Player */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="relative max-w-4xl mx-auto rounded-2xl overflow-hidden border border-[oklch(0.75_0.12_220/0.2)] border-glow mb-16"
+        >
+          <div className="relative aspect-video bg-[oklch(0.08_0.02_250)]">
+            <video
+              ref={videoRef}
+              src={ASSETS.communityVideo}
+              muted={isMuted}
+              loop
+              playsInline
+              preload="metadata"
+              className="w-full h-full object-cover"
+              onClick={handlePlay}
+            />
+
+            {/* Play overlay (shown when not playing and not yet interacted) */}
+            {!isPlaying && !hasInteracted && (
+              <div
+                className="absolute inset-0 flex items-center justify-center bg-[oklch(0.08_0.02_250/0.5)] cursor-pointer"
+                onClick={handlePlay}
+              >
+                <div className="w-16 h-16 rounded-full bg-[oklch(0.75_0.12_220/0.2)] backdrop-blur-sm flex items-center justify-center border border-[oklch(0.75_0.12_220/0.4)]">
+                  <Play className="w-7 h-7 text-ice-blue ml-1" />
+                </div>
+              </div>
+            )}
+
+            {/* Controls */}
+            <div className="absolute bottom-4 right-4 flex gap-2">
+              <button
+                onClick={toggleMute}
+                className="p-2 rounded-lg bg-[oklch(0.10_0.02_250/0.7)] backdrop-blur-sm border border-[oklch(0.75_0.12_220/0.2)] hover:border-[oklch(0.75_0.12_220/0.4)] transition-colors"
+              >
+                {isMuted ? <VolumeX className="w-4 h-4 text-ice-blue" /> : <Volume2 className="w-4 h-4 text-ice-blue" />}
+              </button>
+            </div>
+          </div>
+        </motion.div>
+
         {/* Features Grid */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: '-80px' }}
           transition={{ duration: 0.7 }}
-          className="grid sm:grid-cols-3 gap-6 mb-12"
+          className="grid sm:grid-cols-3 gap-6"
         >
           {communityFeatures.map((feature, i) => (
             <motion.div
@@ -105,7 +196,7 @@ export default function CommunitySection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.4, duration: 0.6 }}
-          className="text-center"
+          className="text-center mt-12"
         >
           <a
             href={LINKS.community}
@@ -116,7 +207,6 @@ export default function CommunitySection() {
           >
             <Users className="w-5 h-5" />
             {t('video.joinCommunity')}
-            <ArrowRight className="w-5 h-5" />
           </a>
         </motion.div>
       </div>
