@@ -3,7 +3,8 @@ import { useAuth } from '@/_core/hooks/useAuth';
 import { trpc } from '@/lib/trpc';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Loader2, TrendingUp, Users, Activity, Zap } from 'lucide-react';
+import { Loader2, TrendingUp, Users, Activity, Zap, Lock } from 'lucide-react';
+import { getLoginUrl } from '@/const';
 import {
   LineChart, Line, BarChart, Bar, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
@@ -73,14 +74,46 @@ export default function AdminDashboard() {
     );
   }
 
-  if (!user || user.role !== 'admin') {
+  if (!user) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
+      <div className="flex items-center justify-center min-h-screen bg-background">
         <Card className="w-full max-w-md">
           <CardHeader>
-            <CardTitle>Access Denied</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <Lock className="w-5 h-5" />
+              Login Required
+            </CardTitle>
+            <CardDescription>Please log in to access the admin dashboard</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Button className="w-full" onClick={() => window.location.href = getLoginUrl()}>
+              Login to Admin Panel
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
+
+  if (user.role !== 'admin') {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-background">
+        <Card className="w-full max-w-md">
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Lock className="w-5 h-5" />
+              Access Denied
+            </CardTitle>
             <CardDescription>You do not have permission to access this page.</CardDescription>
           </CardHeader>
+          <CardContent>
+            <p className="text-sm text-muted-foreground mb-4">
+              Only administrators can access this dashboard. If you believe this is an error, please contact the site owner.
+            </p>
+            <Button variant="outline" className="w-full" onClick={() => window.history.back()}>
+              Go Back
+            </Button>
+          </CardContent>
         </Card>
       </div>
     );
