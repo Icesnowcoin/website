@@ -7,6 +7,7 @@ import Navbar from '@/components/Navbar';
 import ParticleField from '@/components/ParticleField';
 import IntroAnimation from '@/components/IntroAnimation';
 import HeroSection from '@/components/HeroSection';
+import CommunitySection from '@/components/CommunitySection';
 import AboutSection from '@/components/AboutSection';
 import TokenomicsSection from '@/components/TokenomicsSection';
 import EcosystemSection from '@/components/EcosystemSection';
@@ -37,6 +38,8 @@ export default function Home() {
         {/* Page Sections */}
         <main className="relative z-10">
           <HeroSection />
+          <div className="section-divider" />
+          <CommunitySection />
           <div className="section-divider" />
           <AboutSection />
           <div className="section-divider" />

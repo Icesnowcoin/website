@@ -91,6 +91,14 @@ export const translations: Record<Locale, Record<string, string>> = {
     'roadmap.phase4.time': '36-60 个月',
     'roadmap.phase4.items': '100亿美元市值目标|行业龙头地位|完整生态闭环|全球化运营体系',
 
+    // Community
+    'community.feature1': '全球社区',
+    'community.feature1Desc': '连接全球 ISC 爱好者',
+    'community.feature2': '实时讨论',
+    'community.feature2Desc': '参与项目讨论和决策',
+    'community.feature3': '独家福利',
+    'community.feature3Desc': '获取社区专属奖励',
+
     // Video
     'video.title': '社区招募',
     'video.subtitle': '加入 ISC 社区，共建 AI 链游生态帝国',
@@ -196,6 +204,14 @@ export const translations: Record<Locale, Record<string, string>> = {
     'roadmap.phase4.title': 'Maturity Phase',
     'roadmap.phase4.time': '36-60 Months',
     'roadmap.phase4.items': '$10B market cap target|Industry leader position|Complete ecosystem loop|Global operations system',
+
+    // Community
+    'community.feature1': 'Global Community',
+    'community.feature1Desc': 'Connect with ISC enthusiasts worldwide',
+    'community.feature2': 'Real-time Discussion',
+    'community.feature2Desc': 'Participate in project discussions and decisions',
+    'community.feature3': 'Exclusive Benefits',
+    'community.feature3Desc': 'Get community-exclusive rewards',
 
     // Video
     'video.title': 'Community Recruitment',
@@ -303,9 +319,17 @@ export const translations: Record<Locale, Record<string, string>> = {
     'roadmap.phase4.time': '36-60 Tháng',
     'roadmap.phase4.items': 'Mục tiêu vốn hóa $10B|Vị thế dẫn đầu ngành|Hệ sinh thái hoàn chỉnh|Hệ thống vận hành toàn cầu',
 
+    // Community
+    'community.feature1': 'Cộng đồng toàn cầu',
+    'community.feature1Desc': 'Kết nối với những người yêu thích ISC trên toàn thế giới',
+    'community.feature2': 'Thảo luận thời gian thực',
+    'community.feature2Desc': 'Tham gia thảo luận và quyết định dự án',
+    'community.feature3': 'Lợi ích độc quyền',
+    'community.feature3Desc': 'Nhận phần thưởng đốc quyền cộng đồng',
+
     // Video
     'video.title': 'Tuyển dụng cộng đồng',
-    'video.subtitle': 'Tham gia cộng đồng ISC và cùng xây dựng hệ sinh thái trò chơi chuỗi AI',
+    'video.subtitle': 'Tham gia cộng đồng ISC và cùng xây dựng hệ sinh thái trò chơi cổi AI',
     'video.joinCommunity': 'Tham gia cộng đồng',
 
     // Footer
