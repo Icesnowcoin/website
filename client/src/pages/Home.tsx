@@ -5,7 +5,7 @@
 import { useState, useCallback } from 'react';
 import Navbar from '@/components/Navbar';
 import ParticleField from '@/components/ParticleField';
-import IntroAnimation from '@/components/IntroAnimation';
+import PremiumIntroAnimation from '@/components/PremiumIntroAnimation';
 import HeroSection from '@/components/HeroSection';
 import CommunitySection from '@/components/CommunitySection';
 import AboutSection from '@/components/AboutSection';
@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <>
       {/* Intro Animation */}
-      {!introComplete && <IntroAnimation onComplete={handleIntroComplete} />}
+      {!introComplete && <PremiumIntroAnimation onComplete={handleIntroComplete} />}
 
       {/* Main Content */}
       <div className={introComplete ? 'opacity-100' : 'opacity-0'} style={{ transition: 'opacity 0.5s ease-in' }}>
