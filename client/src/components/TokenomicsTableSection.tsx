@@ -1,54 +1,83 @@
-/*
- * Design: Quantum Ice — Tokenomics section
- * Table visualization, key metrics, contract info
- */
-import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Copy, Check } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { ASSETS, LINKS } from '@/lib/assets';
-import { toast } from 'sonner';
 
-const fadeInUp = {
-  initial: { opacity: 0, y: 40 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: '-80px' },
-  transition: { duration: 0.7 },
-};
-
-export default function TokenomicsSection() {
+export default function TokenomicsTableSection() {
   const { t } = useLanguage();
-  const [copied, setCopied] = useState(false);
-
-  const copyContract = () => {
-    navigator.clipboard.writeText(LINKS.contract);
-    setCopied(true);
-    toast.success('Contract address copied!');
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   const tokenomicsData = [
-    { category: t('tokenomics.team'), percent: '20%', amount: '40,520,000 ISC', usage: t('tokenomics.teamDesc') },
-    { category: t('tokenomics.operations'), percent: '30%', amount: '60,780,000 ISC', usage: t('tokenomics.operationsDesc') },
-    { category: t('tokenomics.market'), percent: '40%', amount: '81,040,000 ISC', usage: t('tokenomics.marketDesc') },
-    { category: t('tokenomics.apy'), percent: '10%', amount: '20,260,000 ISC', usage: t('tokenomics.apyDesc') },
+    {
+      category: t('tokenomics.team'),
+      percent: '20%',
+      amount: '40,520,000 ISC',
+      usage: t('tokenomics.teamDesc'),
+    },
+    {
+      category: t('tokenomics.operations'),
+      percent: '30%',
+      amount: '60,780,000 ISC',
+      usage: t('tokenomics.operationsDesc'),
+    },
+    {
+      category: t('tokenomics.market'),
+      percent: '40%',
+      amount: '81,040,000 ISC',
+      usage: t('tokenomics.marketDesc'),
+    },
+    {
+      category: t('tokenomics.apy'),
+      percent: '10%',
+      amount: '20,260,000 ISC',
+      usage: t('tokenomics.apyDesc'),
+    },
   ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6 },
+    },
+  };
 
   return (
     <section id="tokenomics" className="relative py-24 sm:py-32 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0 z-0">
-        <img src={ASSETS.tokenomicsBg} alt="" className="w-full h-full object-cover opacity-15" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+        <div className="absolute inset-0 bg-gradient-to-b from-ice-blue/5 via-transparent to-transparent" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-ice-blue/10 rounded-full blur-3xl" />
       </div>
 
       <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <motion.div {...fadeInUp} className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-bold text-glow" style={{ fontFamily: 'var(--font-heading)', color: 'oklch(0.92 0.03 220)' }}>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.7 }}
+          className="text-center mb-16"
+        >
+          <h2
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4"
+            style={{ fontFamily: 'var(--font-heading)', color: 'oklch(0.90 0.03 220)' }}
+          >
             {t('tokenomics.title')}
           </h2>
-          <p className="mt-3 text-base sm:text-lg" style={{ fontFamily: 'var(--font-sub)', color: 'oklch(0.65 0.08 220)' }}>
+          <p
+            className="text-lg sm:text-xl"
+            style={{ fontFamily: 'var(--font-body)', color: 'oklch(0.70 0.02 220)' }}
+          >
             {t('tokenomics.subtitle')}
           </p>
           <div className="mt-4 mx-auto h-[1px] w-24 bg-gradient-to-r from-transparent via-ice-blue to-transparent" />
@@ -56,11 +85,11 @@ export default function TokenomicsSection() {
 
         {/* Table */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.7 }}
-          className="overflow-x-auto mb-16"
+          className="overflow-x-auto"
         >
           <table className="w-full border-collapse">
             <thead>
@@ -115,10 +144,7 @@ export default function TokenomicsSection() {
               {tokenomicsData.map((row, index) => (
                 <motion.tr
                   key={index}
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1, duration: 0.5 }}
+                  variants={itemVariants}
                   style={{
                     backgroundColor: index % 2 === 0 ? 'oklch(0.10 0.01 250)' : 'transparent',
                     borderBottom: '1px solid oklch(0.20 0.03 250)',
@@ -168,40 +194,48 @@ export default function TokenomicsSection() {
           </table>
         </motion.div>
 
-        {/* Key Metrics */}
-        <motion.div {...fadeInUp} className="grid sm:grid-cols-2 gap-4 mb-10">
-          {[
-            { label: t('tokenomics.presalePrice'), value: '1 USDT = 2000 ISC' },
-            { label: t('tokenomics.audit'), value: 'CertiK & OpenZeppelin' },
-          ].map((metric, i) => (
-            <div key={i} className="glass-card rounded-xl p-4 text-center">
-              <div className="text-xs text-muted-foreground mb-1" style={{ fontFamily: 'var(--font-sub)' }}>{metric.label}</div>
-              <div className="text-sm font-bold text-ice-blue" style={{ fontFamily: 'var(--font-mono)' }}>{metric.value}</div>
-            </div>
-          ))}
-        </motion.div>
-
-        {/* Contract Address */}
-        <motion.div {...fadeInUp} className="glass-card rounded-xl p-4 max-w-2xl mx-auto">
-          <div className="text-xs text-muted-foreground mb-2 text-center" style={{ fontFamily: 'var(--font-sub)' }}>
-            {t('tokenomics.contract')} (BSC - BEP20)
+        {/* Total Supply Info */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+          className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6"
+        >
+          <div
+            className="glass-card rounded-xl p-6 text-center"
+            style={{ borderColor: 'oklch(0.25 0.05 250)' }}
+          >
+            <p
+              className="text-sm mb-2"
+              style={{ fontFamily: 'var(--font-body)', color: 'oklch(0.65 0.02 220)' }}
+            >
+              {t('tokenomics.totalSupply')}
+            </p>
+            <p
+              className="text-2xl sm:text-3xl font-bold"
+              style={{ fontFamily: 'var(--font-mono)', color: 'oklch(0.80 0.12 220)' }}
+            >
+              202.6M ISC
+            </p>
           </div>
-          <div className="flex items-center gap-2 justify-center">
-            <a
-              href={LINKS.bscscan}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-xs sm:text-sm text-ice-blue hover:text-electric-cyan transition-colors break-all"
-              style={{ fontFamily: 'var(--font-mono)' }}
+
+          <div
+            className="glass-card rounded-xl p-6 text-center"
+            style={{ borderColor: 'oklch(0.25 0.05 250)' }}
+          >
+            <p
+              className="text-sm mb-2"
+              style={{ fontFamily: 'var(--font-body)', color: 'oklch(0.65 0.02 220)' }}
             >
-              {LINKS.contract}
-            </a>
-            <button
-              onClick={copyContract}
-              className="shrink-0 p-1.5 rounded-md hover:bg-[oklch(0.75_0.12_220/0.1)] transition-colors"
+              {t('tokenomics.noInflation')}
+            </p>
+            <p
+              className="text-2xl sm:text-3xl font-bold"
+              style={{ fontFamily: 'var(--font-heading)', color: 'oklch(0.80 0.12 195)' }}
             >
-              {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4 text-muted-foreground" />}
-            </button>
+              ✓ {t('tokenomics.noInflation')}
+            </p>
           </div>
         </motion.div>
       </div>

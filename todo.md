@@ -4,3 +4,5 @@
 - [x] 保存 checkpoint 并部署
 - [x] 集成 Web3 钱包 SDK（wagmi + RainbowKit）
 - [x] 激活导航栏连接钱包按钮，支持 MetaMask、Trust Wallet、WalletConnect
+- [x] 将代币经济学部分从环形图表改为表格形式（v2.0 版本）
+- [x] 更新表格翻译键（中文/英文/越南语）
