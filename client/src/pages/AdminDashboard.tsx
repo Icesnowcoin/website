@@ -1,10 +1,13 @@
 import { useState, useMemo } from 'react';
 import { useAuth } from '@/_core/hooks/useAuth';
+import { useLanguage } from '@/contexts/LanguageContext';
 import { trpc } from '@/lib/trpc';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Loader2, TrendingUp, Users, Activity, Zap, Lock } from 'lucide-react';
+import { Loader2, TrendingUp, Users, Activity, Zap, Lock, Globe } from 'lucide-react';
 import { getLoginUrl } from '@/const';
+import { LOCALE_NAMES } from '@/lib/i18n';
+import type { Locale } from '@/lib/i18n';
 import {
   LineChart, Line, BarChart, Bar, PieChart, Pie, Cell,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer
@@ -12,6 +15,7 @@ import {
 
 export default function AdminDashboard() {
   const { user, loading: authLoading } = useAuth();
+  const { locale, setLocale, t } = useLanguage();
   const [dateRange, setDateRange] = useState<'7d' | '30d' | '90d'>('7d');
 
   // Calculate date range
@@ -81,13 +85,13 @@ export default function AdminDashboard() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Lock className="w-5 h-5" />
-              Login Required
+              {t('admin.loginRequired')}
             </CardTitle>
-            <CardDescription>Please log in to access the admin dashboard</CardDescription>
+            <CardDescription>{t('admin.loginDesc')}</CardDescription>
           </CardHeader>
           <CardContent>
             <Button className="w-full" onClick={() => window.location.href = getLoginUrl()}>
-              Login to Admin Panel
+              {t('admin.loginButton')}
             </Button>
           </CardContent>
         </Card>
@@ -102,16 +106,16 @@ export default function AdminDashboard() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Lock className="w-5 h-5" />
-              Access Denied
+              {t('admin.accessDenied')}
             </CardTitle>
-            <CardDescription>You do not have permission to access this page.</CardDescription>
+            <CardDescription>{t('admin.accessDeniedDesc')}</CardDescription>
           </CardHeader>
           <CardContent>
             <p className="text-sm text-muted-foreground mb-4">
-              Only administrators can access this dashboard. If you believe this is an error, please contact the site owner.
+              {t('admin.adminOnly')}
             </p>
             <Button variant="outline" className="w-full" onClick={() => window.history.back()}>
-              Go Back
+              {t('admin.goBack')}
             </Button>
           </CardContent>
         </Card>
@@ -128,227 +132,266 @@ export default function AdminDashboard() {
   const topTraders = topTradersQuery.data || [];
   const liquidityPools = liquidityPoolsQuery.data || [];
 
-  const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'];
+  const isLoading = analyticsQuery.isLoading || pageStatsQuery.isLoading || 
+                   countryStatsQuery.isLoading || deviceStatsQuery.isLoading ||
+                   tradeStatsQuery.isLoading || tradeSummaryQuery.isLoading ||
+                   topTradersQuery.isLoading || liquidityPoolsQuery.isLoading;
 
   return (
-    <div className="min-h-screen bg-background p-8">
+    <div className="min-h-screen bg-background p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2">Admin Dashboard</h1>
-          <p className="text-muted-foreground">Monitor website analytics and trading activity</p>
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+          <div>
+            <h1 className="text-3xl font-bold">{t('admin.title')}</h1>
+            <p className="text-muted-foreground mt-1">{t('admin.subtitle')}</p>
+          </div>
+          
+          {/* Language Switcher */}
+          <div className="flex items-center gap-2 mt-4 md:mt-0">
+            <Globe className="w-4 h-4 text-muted-foreground" />
+            <div className="flex gap-1">
+              {(Object.keys(LOCALE_NAMES) as Locale[]).map((lang) => (
+                <Button
+                  key={lang}
+                  variant={locale === lang ? 'default' : 'outline'}
+                  size="sm"
+                  onClick={() => setLocale(lang)}
+                  className="min-w-16"
+                >
+                  {LOCALE_NAMES[lang]}
+                </Button>
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Date Range Selector */}
         <div className="flex gap-2 mb-8">
-          {(['7d', '30d', '90d'] as const).map((range) => (
-            <Button
-              key={range}
-              variant={dateRange === range ? 'default' : 'outline'}
-              onClick={() => setDateRange(range)}
-            >
-              {range === '7d' ? 'Last 7 Days' : range === '30d' ? 'Last 30 Days' : 'Last 90 Days'}
-            </Button>
-          ))}
+          <Button
+            variant={dateRange === '7d' ? 'default' : 'outline'}
+            onClick={() => setDateRange('7d')}
+          >
+            {t('admin.last7Days')}
+          </Button>
+          <Button
+            variant={dateRange === '30d' ? 'default' : 'outline'}
+            onClick={() => setDateRange('30d')}
+          >
+            {t('admin.last30Days')}
+          </Button>
+          <Button
+            variant={dateRange === '90d' ? 'default' : 'outline'}
+            onClick={() => setDateRange('90d')}
+          >
+            {t('admin.last90Days')}
+          </Button>
         </div>
 
-        {/* Key Metrics */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Visits</CardTitle>
-              <Activity className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{analytics?.totalVisits || 0}</div>
-              <p className="text-xs text-muted-foreground">page views</p>
-            </CardContent>
-          </Card>
+        {isLoading ? (
+          <div className="flex items-center justify-center py-12">
+            <Loader2 className="w-8 h-8 animate-spin" />
+          </div>
+        ) : (
+          <>
+            {/* Key Metrics */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium flex items-center gap-2">
+                    <TrendingUp className="w-4 h-4" />
+                    {t('admin.totalVisits')}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{analytics?.totalVisits || 0}</div>
+                  <p className="text-xs text-muted-foreground">{t('admin.pageViews')}</p>
+                </CardContent>
+              </Card>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Unique Visitors</CardTitle>
-              <Users className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{analytics?.uniqueVisitors || 0}</div>
-              <p className="text-xs text-muted-foreground">unique sessions</p>
-            </CardContent>
-          </Card>
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium flex items-center gap-2">
+                    <Users className="w-4 h-4" />
+                    {t('admin.uniqueVisitors')}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{analytics?.uniqueVisitors || 0}</div>
+                  <p className="text-xs text-muted-foreground">{t('admin.uniqueSessions')}</p>
+                </CardContent>
+              </Card>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Total Trades</CardTitle>
-              <TrendingUp className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{tradeSummary?.totalTrades || 0}</div>
-              <p className="text-xs text-muted-foreground">transactions</p>
-            </CardContent>
-          </Card>
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium flex items-center gap-2">
+                    <Activity className="w-4 h-4" />
+                    {t('admin.totalTrades')}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{tradeSummary?.totalTrades || 0}</div>
+                  <p className="text-xs text-muted-foreground">{t('admin.transactions')}</p>
+                </CardContent>
+              </Card>
 
-          <Card>
-            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-              <CardTitle className="text-sm font-medium">Liquidity Pools</CardTitle>
-              <Zap className="h-4 w-4 text-muted-foreground" />
-            </CardHeader>
-            <CardContent>
-              <div className="text-2xl font-bold">{liquidityPools?.length || 0}</div>
-              <p className="text-xs text-muted-foreground">active pools</p>
-            </CardContent>
-          </Card>
-        </div>
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium flex items-center gap-2">
+                    <Zap className="w-4 h-4" />
+                    {t('admin.liquidityPools')}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-2xl font-bold">{liquidityPools.length}</div>
+                  <p className="text-xs text-muted-foreground">{t('admin.activePools')}</p>
+                </CardContent>
+              </Card>
+            </div>
 
-        {/* Charts */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
-          {/* Page Stats Chart */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Top Pages</CardTitle>
-              <CardDescription>Most visited pages</CardDescription>
-            </CardHeader>
-            <CardContent>
-              {pageStats.length > 0 ? (
-                <ResponsiveContainer width="100%" height={300}>
-                  <BarChart data={pageStats.slice(0, 5)}>
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis dataKey="pageUrl" angle={-45} textAnchor="end" height={80} />
-                    <YAxis />
-                    <Tooltip />
-                    <Bar dataKey="visits" fill="#8884d8" />
-                  </BarChart>
-                </ResponsiveContainer>
-              ) : (
-                <div className="text-center py-8 text-muted-foreground">No data available</div>
-              )}
-            </CardContent>
-          </Card>
+            {/* Charts Grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+              {/* Top Pages */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>{t('admin.topPages')}</CardTitle>
+                  <CardDescription>{t('admin.mostVisitedPages')}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ResponsiveContainer width="100%" height={300}>
+                    <BarChart data={pageStats}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis dataKey="page" angle={-45} textAnchor="end" height={80} />
+                      <YAxis />
+                      <Tooltip />
+                      <Bar dataKey="visits" fill="#8b5cf6" />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </CardContent>
+              </Card>
 
-          {/* Device Stats Pie Chart */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Device Distribution</CardTitle>
-              <CardDescription>Visitor device types</CardDescription>
-            </CardHeader>
-            <CardContent>
-              {deviceStats.length > 0 ? (
-                <ResponsiveContainer width="100%" height={300}>
-                  <PieChart>
-                    <Pie
-                      data={deviceStats}
-                      dataKey="visits"
-                      nameKey="deviceType"
-                      cx="50%"
-                      cy="50%"
-                      outerRadius={80}
-                      label
-                    >
-                      {deviceStats.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                      ))}
-                    </Pie>
-                    <Tooltip />
-                  </PieChart>
-                </ResponsiveContainer>
-              ) : (
-                <div className="text-center py-8 text-muted-foreground">No data available</div>
-              )}
-            </CardContent>
-          </Card>
+              {/* Device Distribution */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>{t('admin.deviceDistribution')}</CardTitle>
+                  <CardDescription>{t('admin.visitorDeviceTypes')}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ResponsiveContainer width="100%" height={300}>
+                    <PieChart>
+                      <Pie
+                        data={deviceStats}
+                        dataKey="count"
+                        nameKey="device"
+                        cx="50%"
+                        cy="50%"
+                        outerRadius={80}
+                        label
+                      >
+                        {deviceStats.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={['#0ea5e9', '#06b6d4', '#f59e0b'][index % 3]} />
+                        ))}
+                      </Pie>
+                      <Tooltip />
+                    </PieChart>
+                  </ResponsiveContainer>
+                </CardContent>
+              </Card>
+            </div>
 
-          {/* Country Stats */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Top Countries</CardTitle>
-              <CardDescription>Visitor geographic distribution</CardDescription>
-            </CardHeader>
-            <CardContent>
-              {countryStats.length > 0 ? (
-                <div className="space-y-4">
-                  {countryStats.slice(0, 5).map((country, index) => (
-                    <div key={index} className="flex items-center justify-between">
-                      <span className="text-sm font-medium">{country.country || 'Unknown'}</span>
-                      <div className="flex items-center gap-2">
-                        <div className="w-32 bg-secondary rounded-full h-2">
-                          <div
-                            className="bg-primary h-2 rounded-full"
-                            style={{
-                              width: `${(country.visits / Math.max(...countryStats.map(c => c.visits))) * 100}%`
-                            }}
-                          />
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+              {/* Top Countries */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>{t('admin.topCountries')}</CardTitle>
+                  <CardDescription>{t('admin.visitorGeographic')}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {countryStats.map((stat, idx) => (
+                      <div key={idx} className="flex items-center justify-between">
+                        <span className="text-sm font-medium">{stat.country}</span>
+                        <div className="flex items-center gap-2">
+                          <div className="w-24 h-2 bg-muted rounded-full overflow-hidden">
+                            <div
+                              className="h-full bg-cyan-500"
+                              style={{
+                                width: `${(stat.visits / Math.max(...countryStats.map(s => s.visits))) * 100}%`
+                              }}
+                            />
+                          </div>
+                          <span className="text-sm text-muted-foreground w-8 text-right">{stat.visits}</span>
                         </div>
-                        <span className="text-sm text-muted-foreground">{country.visits}</span>
                       </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-8 text-muted-foreground">No data available</div>
-              )}
-            </CardContent>
-          </Card>
-
-          {/* Trade Stats */}
-          <Card>
-            <CardHeader>
-              <CardTitle>Trade Activity</CardTitle>
-              <CardDescription>Transaction types</CardDescription>
-            </CardHeader>
-            <CardContent>
-              {tradeStats.length > 0 ? (
-                <div className="space-y-4">
-                  {tradeStats.map((stat, index) => (
-                    <div key={index} className="flex items-center justify-between">
-                      <span className="text-sm font-medium capitalize">{stat.tradeType}</span>
-                      <div className="flex items-center gap-2">
-                        <span className="text-sm font-bold">{stat.count}</span>
-                        <span className="text-sm text-muted-foreground">trades</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-8 text-muted-foreground">No data available</div>
-              )}
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Top Traders */}
-        <Card>
-          <CardHeader>
-            <CardTitle>Top Traders</CardTitle>
-            <CardDescription>Most active traders by volume</CardDescription>
-          </CardHeader>
-          <CardContent>
-            {topTraders.length > 0 ? (
-              <div className="overflow-x-auto">
-                <table className="w-full text-sm">
-                  <thead>
-                    <tr className="border-b">
-                      <th className="text-left py-2 px-4">Trader Address</th>
-                      <th className="text-right py-2 px-4">Trade Count</th>
-                      <th className="text-right py-2 px-4">Total Volume (USD)</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {topTraders.map((trader, index) => (
-                      <tr key={index} className="border-b hover:bg-secondary">
-                        <td className="py-2 px-4 font-mono text-xs">
-                          {trader.trader.slice(0, 6)}...{trader.trader.slice(-4)}
-                        </td>
-                        <td className="text-right py-2 px-4">{trader.tradeCount}</td>
-                        <td className="text-right py-2 px-4">${Number(trader.totalVolume).toLocaleString()}</td>
-                      </tr>
                     ))}
-                  </tbody>
-                </table>
-              </div>
-            ) : (
-              <div className="text-center py-8 text-muted-foreground">No data available</div>
-            )}
-          </CardContent>
-        </Card>
+                  </div>
+                </CardContent>
+              </Card>
+
+              {/* Trade Activity */}
+              <Card>
+                <CardHeader>
+                  <CardTitle>{t('admin.tradeActivity')}</CardTitle>
+                  <CardDescription>{t('admin.transactionTypes')}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-4">
+                    {tradeStats.map((stat, idx) => (
+                      <div key={idx} className="flex items-center justify-between">
+                        <span className="text-sm font-medium">
+                          {stat.tradeType === 'swap' && t('admin.swap')}
+                          {stat.tradeType === 'add_liquidity' && t('admin.addLiquidity')}
+                          {stat.tradeType === 'remove_liquidity' && t('admin.removeLiquidity')}
+                        </span>
+                        <div className="flex items-center gap-2">
+                          <span className="text-sm text-muted-foreground">{stat.count} {t('admin.trades')}</span>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            {/* Top Traders */}
+            <Card>
+              <CardHeader>
+                <CardTitle>{t('admin.topTraders')}</CardTitle>
+                <CardDescription>{t('admin.mostActiveTradersVolume')}</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-sm">
+                    <thead>
+                      <tr className="border-b">
+                        <th className="text-left py-2 px-4 font-semibold">{t('admin.traderAddress')}</th>
+                        <th className="text-right py-2 px-4 font-semibold">{t('admin.tradeCount')}</th>
+                        <th className="text-right py-2 px-4 font-semibold">{t('admin.totalVolume')}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {topTraders.length > 0 ? (
+                        topTraders.map((trader, idx) => (
+                          <tr key={idx} className="border-b hover:bg-muted/50">
+                            <td className="py-2 px-4 font-mono text-xs">{trader.trader}</td>
+                            <td className="text-right py-2 px-4">{trader.tradeCount}</td>
+                            <td className="text-right py-2 px-4">${parseFloat(trader.totalVolume).toFixed(2)}</td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td colSpan={3} className="text-center py-4 text-muted-foreground">
+                            {t('admin.noData')}
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              </CardContent>
+            </Card>
+          </>
+        )}
       </div>
     </div>
   );
