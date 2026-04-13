@@ -236,3 +236,53 @@ export async function getTradeSummary(startDate: Date, endDate: Date) {
     totalVolume: totalVolume[0]?.sum || "0",
   };
 }
+
+// Get detailed trades for a specific trader
+export async function getTraderDetails(traderAddress: string, limit: number = 100) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  return db
+    .select({
+      id: trades.id,
+      txHash: trades.txHash,
+      tradeType: trades.tradeType,
+      direction: trades.direction,
+      iscAmount: trades.iscAmount,
+      otherTokenAmount: trades.otherTokenAmount,
+      otherTokenSymbol: trades.otherTokenSymbol,
+      usdValue: trades.usdValue,
+      timestamp: trades.timestamp,
+      blockNumber: trades.blockNumber,
+    })
+    .from(trades)
+    .where(eq(trades.trader, traderAddress))
+    .orderBy(desc(trades.timestamp))
+    .limit(limit);
+}
+
+// Get trader statistics
+export async function getTraderStats(traderAddress: string) {
+  const db = await getDb();
+  if (!db) throw new Error("Database not available");
+  
+  const stats = await db
+    .select({
+      totalTrades: sql<number>`COUNT(*) as totalTrades`,
+      totalVolume: sql<string>`SUM(CAST(${trades.usdValue} AS DECIMAL(20,2))) as totalVolume`,
+      buyCount: sql<number>`SUM(CASE WHEN ${trades.direction} = 'buy' THEN 1 ELSE 0 END) as buyCount`,
+      sellCount: sql<number>`SUM(CASE WHEN ${trades.direction} = 'sell' THEN 1 ELSE 0 END) as sellCount`,
+      totalIscBought: sql<string>`SUM(CASE WHEN ${trades.direction} = 'buy' THEN CAST(${trades.iscAmount} AS DECIMAL(30,8)) ELSE 0 END) as totalIscBought`,
+      totalIscSold: sql<string>`SUM(CASE WHEN ${trades.direction} = 'sell' THEN CAST(${trades.iscAmount} AS DECIMAL(30,8)) ELSE 0 END) as totalIscSold`,
+    })
+    .from(trades)
+    .where(eq(trades.trader, traderAddress));
+  
+  return stats[0] || {
+    totalTrades: 0,
+    totalVolume: "0",
+    buyCount: 0,
+    sellCount: 0,
+    totalIscBought: "0",
+    totalIscSold: "0",
+  };
+}

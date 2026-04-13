@@ -84,6 +84,10 @@ export const trades = mysqlTable("trades", {
   gasUsed: text("gasUsed"),
   gasPrice: text("gasPrice"),
   blockNumber: int("blockNumber").notNull(),
+  direction: mysqlEnum("direction", ["buy", "sell"]).default("buy").notNull(),
+  iscAmount: text("iscAmount"),
+  otherTokenAmount: text("otherTokenAmount"),
+  otherTokenSymbol: varchar("otherTokenSymbol", { length: 20 }),
   timestamp: timestamp("timestamp").notNull(),
   createdAt: timestamp("createdAt").defaultNow().notNull(),
 });

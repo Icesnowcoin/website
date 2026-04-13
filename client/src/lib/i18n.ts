@@ -476,3 +476,85 @@ export function useTranslation(locale: Locale) {
     return translations[locale][key] || translations.en[key] || key;
   };
 }
+
+// Add trader details translations
+const traderDetailsKeys = [
+  'admin.traderStats',
+  'admin.buyCount',
+  'admin.sellCount',
+  'admin.iscBought',
+  'admin.iscSold',
+  'admin.tradeDetails',
+  'admin.tradeDetailsDesc',
+  'admin.txHash',
+  'admin.type',
+  'admin.direction',
+  'admin.iscAmount',
+  'admin.otherToken',
+  'admin.timestamp',
+  'admin.viewDetails',
+  'admin.closeDetails',
+  'admin.action',
+];
+
+const traderDetailsZh: Record<string, string> = {
+  'admin.traderStats': '交易者统计',
+  'admin.buyCount': '购买次数',
+  'admin.sellCount': '抛售次数',
+  'admin.iscBought': '购买的ISC',
+  'admin.iscSold': '抛售的ISC',
+  'admin.tradeDetails': '交易详情',
+  'admin.tradeDetailsDesc': '此交易者的所有交易',
+  'admin.txHash': '交易哈希',
+  'admin.type': '类型',
+  'admin.direction': '方向',
+  'admin.iscAmount': 'ISC数量',
+  'admin.otherToken': '其他代币',
+  'admin.timestamp': '时间',
+  'admin.viewDetails': '查看详情',
+  'admin.closeDetails': '关闭详情',
+  'admin.action': '操作',
+};
+
+const traderDetailsEn: Record<string, string> = {
+  'admin.traderStats': 'Trader Statistics',
+  'admin.buyCount': 'Buy Count',
+  'admin.sellCount': 'Sell Count',
+  'admin.iscBought': 'ISC Bought',
+  'admin.iscSold': 'ISC Sold',
+  'admin.tradeDetails': 'Trade Details',
+  'admin.tradeDetailsDesc': 'All transactions for this trader',
+  'admin.txHash': 'Tx Hash',
+  'admin.type': 'Type',
+  'admin.direction': 'Direction',
+  'admin.iscAmount': 'ISC Amount',
+  'admin.otherToken': 'Other Token',
+  'admin.timestamp': 'Time',
+  'admin.viewDetails': 'View Details',
+  'admin.closeDetails': 'Close Details',
+  'admin.action': 'Action',
+};
+
+const traderDetailsVi: Record<string, string> = {
+  'admin.traderStats': 'Thống kê Nhà giao dịch',
+  'admin.buyCount': 'Số lần mua',
+  'admin.sellCount': 'Số lần bán',
+  'admin.iscBought': 'ISC đã mua',
+  'admin.iscSold': 'ISC đã bán',
+  'admin.tradeDetails': 'Chi tiết giao dịch',
+  'admin.tradeDetailsDesc': 'Tất cả các giao dịch của nhà giao dịch này',
+  'admin.txHash': 'Mã Tx',
+  'admin.type': 'Loại',
+  'admin.direction': 'Hướng',
+  'admin.iscAmount': 'Số lượng ISC',
+  'admin.otherToken': 'Token khác',
+  'admin.timestamp': 'Thời gian',
+  'admin.viewDetails': 'Xem chi tiết',
+  'admin.closeDetails': 'Đóng chi tiết',
+  'admin.action': 'Hành động',
+};
+
+// Merge trader details translations
+Object.assign(translations.zh, traderDetailsZh);
+Object.assign(translations.en, traderDetailsEn);
+Object.assign(translations.vi, traderDetailsVi);

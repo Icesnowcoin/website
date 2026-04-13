@@ -4,6 +4,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { trpc } from '@/lib/trpc';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { TraderDetailsTable } from '@/components/TraderDetailsTable';
 import { Loader2, TrendingUp, Users, Activity, Zap, Lock, Globe } from 'lucide-react';
 import { getLoginUrl } from '@/const';
 import { LOCALE_NAMES } from '@/lib/i18n';
@@ -17,6 +18,7 @@ export default function AdminDashboard() {
   const { user, loading: authLoading } = useAuth();
   const { locale, setLocale, t } = useLanguage();
   const [dateRange, setDateRange] = useState<'7d' | '30d' | '90d'>('7d');
+  const [selectedTrader, setSelectedTrader] = useState<string | null>(null);
 
   // Calculate date range
   const { startDate, endDate } = useMemo(() => {
@@ -367,6 +369,7 @@ export default function AdminDashboard() {
                         <th className="text-left py-2 px-4 font-semibold">{t('admin.traderAddress')}</th>
                         <th className="text-right py-2 px-4 font-semibold">{t('admin.tradeCount')}</th>
                         <th className="text-right py-2 px-4 font-semibold">{t('admin.totalVolume')}</th>
+                        <th className="text-center py-2 px-4 font-semibold">{t('admin.action')}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -376,11 +379,20 @@ export default function AdminDashboard() {
                             <td className="py-2 px-4 font-mono text-xs">{trader.trader}</td>
                             <td className="text-right py-2 px-4">{trader.tradeCount}</td>
                             <td className="text-right py-2 px-4">${parseFloat(trader.totalVolume).toFixed(2)}</td>
+                            <td className="text-center py-2 px-4">
+                              <Button 
+                                variant="outline" 
+                                size="sm"
+                                onClick={() => setSelectedTrader(trader.trader)}
+                              >
+                                {t('admin.viewDetails')}
+                              </Button>
+                            </td>
                           </tr>
                         ))
                       ) : (
                         <tr>
-                          <td colSpan={3} className="text-center py-4 text-muted-foreground">
+                          <td colSpan={4} className="text-center py-4 text-muted-foreground">
                             {t('admin.noData')}
                           </td>
                         </tr>
@@ -390,6 +402,21 @@ export default function AdminDashboard() {
                 </div>
               </CardContent>
             </Card>
+
+            {/* Trader Details */}
+            {selectedTrader && (
+              <div className="mt-8">
+                <TraderDetailsTable traderAddress={selectedTrader} />
+                <div className="mt-4">
+                  <Button 
+                    variant="outline" 
+                    onClick={() => setSelectedTrader(null)}
+                  >
+                    {t('admin.closeDetails') || 'Close Details'}
+                  </Button>
+                </div>
+              </div>
+            )}
           </>
         )}
       </div>

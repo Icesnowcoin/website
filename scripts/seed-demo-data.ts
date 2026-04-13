@@ -97,11 +97,18 @@ async function seedDemoData() {
     // Generate trade data
     const tradesData = [];
     const tradeTypes: Array<'swap' | 'add_liquidity' | 'remove_liquidity'> = ['swap', 'add_liquidity', 'remove_liquidity'];
+    const directions: Array<'buy' | 'sell'> = ['buy', 'sell'];
+    const otherTokens = ['USDT', 'BUSD', 'USDC', 'BNB'];
 
     for (let i = 0; i < 150; i++) {
       const date = new Date();
       date.setDate(date.getDate() - Math.floor(Math.random() * 7));
       date.setHours(Math.floor(Math.random() * 24), Math.floor(Math.random() * 60), 0, 0);
+
+      const direction = directions[Math.floor(Math.random() * directions.length)];
+      const iscAmount = (Math.random() * 1000 + 10).toFixed(2);
+      const otherTokenAmount = (Math.random() * 5000 + 100).toFixed(2);
+      const otherTokenSymbol = otherTokens[Math.floor(Math.random() * otherTokens.length)];
 
       tradesData.push({
         poolId: Math.floor(Math.random() * 3) + 1,
@@ -114,6 +121,10 @@ async function seedDemoData() {
         gasUsed: '150000',
         gasPrice: '5000000000',
         blockNumber: Math.floor(Math.random() * 50000000) + 30000000,
+        direction: direction,
+        iscAmount: iscAmount,
+        otherTokenAmount: otherTokenAmount,
+        otherTokenSymbol: otherTokenSymbol,
         timestamp: date,
       });
     }

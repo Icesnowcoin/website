@@ -103,6 +103,23 @@ export const appRouter = router({
           if (ctx.user?.role !== 'admin') throw new TRPCError({ code: 'FORBIDDEN' });
           return adminDb.getTopTraders(input.startDate, input.endDate, input.limit);
         }),
+      traderDetails: protectedProcedure
+        .input(z.object({
+          traderAddress: z.string(),
+          limit: z.number().default(100),
+        }))
+        .query(async ({ input, ctx }) => {
+          if (ctx.user?.role !== 'admin') throw new TRPCError({ code: 'FORBIDDEN' });
+          return adminDb.getTraderDetails(input.traderAddress, input.limit);
+        }),
+      traderStats: protectedProcedure
+        .input(z.object({
+          traderAddress: z.string(),
+        }))
+        .query(async ({ input, ctx }) => {
+          if (ctx.user?.role !== 'admin') throw new TRPCError({ code: 'FORBIDDEN' });
+          return adminDb.getTraderStats(input.traderAddress);
+        }),
     }),
   }),
 });
