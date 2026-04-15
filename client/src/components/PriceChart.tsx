@@ -156,13 +156,13 @@ export default function PriceChart({ symbols = ['BTC', 'ETH', 'ISC'], defaultSym
               <CardHeader className="pb-3">
                 <div className="flex justify-between items-start">
                   <CardTitle className="text-lg">{price.symbol}</CardTitle>
-                  <div className={`flex items-center gap-1 ${parseFloat(price.priceChange24h || 0) >= 0 ? 'text-green-500' : 'text-red-500'}`}>
-                    {parseFloat(price.priceChange24h || 0) >= 0 ? (
+                  <div className={`flex items-center gap-1 ${parseFloat(price.change24h || 0) >= 0 ? 'text-green-500' : 'text-red-500'}`}>
+                    {parseFloat(price.change24h || 0) >= 0 ? (
                       <TrendingUp className="w-4 h-4" />
                     ) : (
                       <TrendingDown className="w-4 h-4" />
                     )}
-                    {formatChange(price.priceChange24h)}
+                    {formatChange(price.change24h)}
                   </div>
                 </div>
               </CardHeader>
@@ -174,13 +174,7 @@ export default function PriceChart({ symbols = ['BTC', 'ETH', 'ISC'], defaultSym
                 {price.marketCap && (
                   <div>
                     <p className="text-sm text-muted-foreground">{dict.marketCap}</p>
-                    <p className="text-sm font-semibold">${price.marketCap}</p>
-                  </div>
-                )}
-                {price.volume24h && (
-                  <div>
-                    <p className="text-sm text-muted-foreground">{dict.volume}</p>
-                    <p className="text-sm font-semibold">${price.volume24h}</p>
+                    <p className="text-sm font-semibold">${price.marketCap.toLocaleString('en-US', { maximumFractionDigits: 0 })}</p>
                   </div>
                 )}
               </CardContent>

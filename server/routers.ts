@@ -125,22 +125,25 @@ export const appRouter = router({
   }),
 
   prices: router({
-    // Get current price for a token
+    // Get current price for a token from CoinGecko
     current: publicProcedure
       .input(z.object({
         symbol: z.string(),
       }))
       .query(async ({ input }) => {
-        return pricesDb.getTokenPrice(input.symbol);
+        const { fetchPrices } = await import('./coingecko');
+        const prices = await fetchPrices([input.symbol]);
+        return prices.length > 0 ? prices[0] : null;
       }),
 
-    // Get current prices for multiple tokens
+    // Get current prices for multiple tokens from CoinGecko
     multiple: publicProcedure
       .input(z.object({
         symbols: z.array(z.string()),
       }))
       .query(async ({ input }) => {
-        return pricesDb.getTokenPrices(input.symbols);
+        const { fetchPrices } = await import('./coingecko');
+        return fetchPrices(input.symbols);
       }),
 
     // Get all token prices
@@ -168,13 +171,14 @@ export const appRouter = router({
         return pricesDb.getPriceStats(input.symbol);
       }),
 
-    // Get top tokens by market cap
+    // Get top tokens by market cap from CoinGecko
     top: publicProcedure
       .input(z.object({
         limit: z.number().default(10),
       }))
       .query(async ({ input }) => {
-        return pricesDb.getTopTokens(input.limit);
+        const { fetchTopCryptos } = await import('./coingecko');
+        return fetchTopCryptos(input.limit);
       }),
   }),
 });
