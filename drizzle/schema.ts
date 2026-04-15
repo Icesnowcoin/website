@@ -113,3 +113,45 @@ export const dailyStats = mysqlTable("daily_stats", {
 
 export type DailyStat = typeof dailyStats.$inferSelect;
 export type InsertDailyStat = typeof dailyStats.$inferInsert;
+
+/**
+ * Token prices table for tracking cryptocurrency prices
+ */
+export const tokenPrices = mysqlTable("token_prices", {
+  id: int("id").autoincrement().primaryKey(),
+  symbol: varchar("symbol", { length: 20 }).notNull(), // BTC, ETH, ISC, etc.
+  name: varchar("name", { length: 100 }).notNull(), // Bitcoin, Ethereum, etc.
+  price: decimal("price", { precision: 20, scale: 8 }).notNull(), // Current price in USD
+  priceChange24h: decimal("priceChange24h", { precision: 10, scale: 2 }), // Percentage change
+  marketCap: text("marketCap"), // Market cap in USD
+  volume24h: text("volume24h"), // 24h trading volume
+  circulatingSupply: text("circulatingSupply"), // Circulating supply
+  totalSupply: text("totalSupply"), // Total supply
+  maxSupply: text("maxSupply"), // Max supply
+  ath: decimal("ath", { precision: 20, scale: 8 }), // All-time high
+  atl: decimal("atl", { precision: 20, scale: 8 }), // All-time low
+  image: varchar("image", { length: 512 }), // Token image URL
+  coingeckoId: varchar("coingeckoId", { length: 100 }), // CoinGecko ID
+  lastUpdated: timestamp("lastUpdated").defaultNow().onUpdateNow().notNull(),
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type TokenPrice = typeof tokenPrices.$inferSelect;
+export type InsertTokenPrice = typeof tokenPrices.$inferInsert;
+
+/**
+ * Historical price data for charting
+ */
+export const priceHistory = mysqlTable("price_history", {
+  id: int("id").autoincrement().primaryKey(),
+  symbol: varchar("symbol", { length: 20 }).notNull(), // BTC, ETH, ISC, etc.
+  timestamp: timestamp("timestamp").notNull(), // Time of price snapshot
+  price: decimal("price", { precision: 20, scale: 8 }).notNull(), // Price in USD
+  high24h: decimal("high24h", { precision: 20, scale: 8 }), // 24h high
+  low24h: decimal("low24h", { precision: 20, scale: 8 }), // 24h low
+  volume24h: text("volume24h"), // 24h volume
+  createdAt: timestamp("createdAt").defaultNow().notNull(),
+});
+
+export type PriceHistory = typeof priceHistory.$inferSelect;
+export type InsertPriceHistory = typeof priceHistory.$inferInsert;

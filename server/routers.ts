@@ -4,6 +4,7 @@ import { publicProcedure, router, protectedProcedure } from "./_core/trpc";
 import { COOKIE_NAME } from "../shared/const";
 import { TRPCError } from "@trpc/server";
 import * as adminDb from "./db.admin";
+import * as pricesDb from "./db.prices";
 import { z } from "zod";
 
 export const appRouter = router({
@@ -121,6 +122,60 @@ export const appRouter = router({
           return adminDb.getTraderStats(input.traderAddress);
         }),
     }),
+  }),
+
+  prices: router({
+    // Get current price for a token
+    current: publicProcedure
+      .input(z.object({
+        symbol: z.string(),
+      }))
+      .query(async ({ input }) => {
+        return pricesDb.getTokenPrice(input.symbol);
+      }),
+
+    // Get current prices for multiple tokens
+    multiple: publicProcedure
+      .input(z.object({
+        symbols: z.array(z.string()),
+      }))
+      .query(async ({ input }) => {
+        return pricesDb.getTokenPrices(input.symbols);
+      }),
+
+    // Get all token prices
+    all: publicProcedure
+      .query(async () => {
+        return pricesDb.getAllTokenPrices();
+      }),
+
+    // Get price history for a token
+    history: publicProcedure
+      .input(z.object({
+        symbol: z.string(),
+        days: z.number().default(30),
+      }))
+      .query(async ({ input }) => {
+        return pricesDb.getPriceHistory(input.symbol, input.days);
+      }),
+
+    // Get price statistics
+    stats: publicProcedure
+      .input(z.object({
+        symbol: z.string(),
+      }))
+      .query(async ({ input }) => {
+        return pricesDb.getPriceStats(input.symbol);
+      }),
+
+    // Get top tokens by market cap
+    top: publicProcedure
+      .input(z.object({
+        limit: z.number().default(10),
+      }))
+      .query(async ({ input }) => {
+        return pricesDb.getTopTokens(input.limit);
+      }),
   }),
 });
 

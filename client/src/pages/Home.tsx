@@ -13,6 +13,7 @@ import TokenomicsSection from '@/components/TokenomicsSection';
 import EcosystemSection from '@/components/EcosystemSection';
 import RoadmapSection from '@/components/RoadmapSection';
 import VideoSection from '@/components/VideoSection';
+import PriceChart from '@/components/PriceChart';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -44,6 +45,10 @@ export default function Home() {
           <AboutSection />
           <div className="section-divider" />
           <TokenomicsSection />
+          <div className="section-divider" />
+          <div className="section-container py-20">
+            <PriceChart />
+          </div>
           <div className="section-divider" />
           <EcosystemSection />
           <div className="section-divider" />
