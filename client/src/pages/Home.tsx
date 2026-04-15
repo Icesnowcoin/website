@@ -1,11 +1,9 @@
 /*
  * Design: Quantum Ice — Main landing page
- * Assembles all sections with particle background and intro animation
+ * Assembles all sections with particle background
  */
-import { useState, useCallback } from 'react';
 import Navbar from '@/components/Navbar';
 import ParticleField from '@/components/ParticleField';
-import ISCLogoIntroAnimation from '@/components/ISCLogoIntroAnimation';
 import HeroSection from '@/components/HeroSection';
 import CommunitySection from '@/components/CommunitySection';
 import AboutSection from '@/components/AboutSection';
@@ -17,49 +15,37 @@ import PriceChart from '@/components/PriceChart';
 import Footer from '@/components/Footer';
 
 export default function Home() {
-  const [introComplete, setIntroComplete] = useState(false);
-
-  const handleIntroComplete = useCallback(() => {
-    setIntroComplete(true);
-  }, []);
-
   return (
     <>
-      {/* Intro Animation */}
-      {!introComplete && <ISCLogoIntroAnimation onComplete={handleIntroComplete} />}
+      {/* Global particle background */}
+      <ParticleField />
 
-      {/* Main Content */}
-      <div className={introComplete ? 'opacity-100' : 'opacity-0'} style={{ transition: 'opacity 0.5s ease-in' }}>
-        {/* Global particle background */}
-        <ParticleField />
+      {/* Navigation */}
+      <Navbar />
 
-        {/* Navigation */}
-        <Navbar />
+      {/* Page Sections */}
+      <main className="relative z-10">
+        <HeroSection />
+        <div className="section-divider" />
+        <CommunitySection />
+        <div className="section-divider" />
+        <AboutSection />
+        <div className="section-divider" />
+        <TokenomicsSection />
+        <div className="section-divider" />
+        <div className="section-container py-20">
+          <PriceChart />
+        </div>
+        <div className="section-divider" />
+        <EcosystemSection />
+        <div className="section-divider" />
+        <RoadmapSection />
+        <div className="section-divider" />
+        <VideoSection />
+      </main>
 
-        {/* Page Sections */}
-        <main className="relative z-10">
-          <HeroSection />
-          <div className="section-divider" />
-          <CommunitySection />
-          <div className="section-divider" />
-          <AboutSection />
-          <div className="section-divider" />
-          <TokenomicsSection />
-          <div className="section-divider" />
-          <div className="section-container py-20">
-            <PriceChart />
-          </div>
-          <div className="section-divider" />
-          <EcosystemSection />
-          <div className="section-divider" />
-          <RoadmapSection />
-          <div className="section-divider" />
-          <VideoSection />
-        </main>
-
-        {/* Footer */}
-        <Footer />
-      </div>
+      {/* Footer */}
+      <Footer />
     </>
   );
 }
