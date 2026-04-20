@@ -8,7 +8,8 @@ import HeroSection from '@/components/HeroSection';
 import CommunitySection from '@/components/CommunitySection';
 import AboutSection from '@/components/AboutSection';
 import TokenomicsSection from '@/components/TokenomicsSection';
-import EcosystemSection from '@/components/EcosystemSection';
+import EcosystemShowcase from '@/components/EcosystemShowcase';
+import SecurityAndGovernance from '@/components/SecurityAndGovernance';
 import RoadmapSection from '@/components/RoadmapSection';
 import VideoSection from '@/components/VideoSection';
 import PriceChart from '@/components/PriceChart';
@@ -37,7 +38,9 @@ export default function Home() {
           <PriceChart />
         </div>
         <div className="section-divider" />
-        <EcosystemSection />
+        <EcosystemShowcase />
+        <div className="section-divider" />
+        <SecurityAndGovernance />
         <div className="section-divider" />
         <RoadmapSection />
         <div className="section-divider" />

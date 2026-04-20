@@ -28,10 +28,10 @@ export default function TokenomicsSection() {
   };
 
   const tokenomicsData = [
-    { category: t('tokenomics.team'), percent: '20%', amount: '40,520,000 ISC', usage: t('tokenomics.teamDesc') },
-    { category: t('tokenomics.operations'), percent: '30%', amount: '60,780,000 ISC', usage: t('tokenomics.operationsDesc') },
-    { category: t('tokenomics.market'), percent: '40%', amount: '81,040,000 ISC', usage: t('tokenomics.marketDesc') },
-    { category: t('tokenomics.apy'), percent: '10%', amount: '20,260,000 ISC', usage: t('tokenomics.apyDesc') },
+    { category: 'Liquidity Pool (Short-term)', percent: '5%', amount: '10,130,000 ISC', usage: '1 Year Lock (UNCX Network)', lock: '✓ Locked' },
+    { category: 'Liquidity Pool (Long-term)', percent: '35%', amount: '70,910,000 ISC', usage: '4 Years Lock (UNCX Network)', lock: '✓ Locked' },
+    { category: t('tokenomics.team'), percent: '20%', amount: '40,520,000 ISC', usage: '24 Months Linear Release (Team Finance)', lock: '✓ Locked' },
+    { category: 'Community / Ecosystem / Marketing', percent: 'Remaining', amount: '80,040,000 ISC', usage: t('tokenomics.operationsDesc'), lock: 'Planned' },
   ];
 
   return (
@@ -49,8 +49,13 @@ export default function TokenomicsSection() {
             {t('tokenomics.title')}
           </h2>
           <p className="mt-3 text-base sm:text-lg" style={{ fontFamily: 'var(--font-sub)', color: 'oklch(0.65 0.08 220)' }}>
-            {t('tokenomics.subtitle')}
+            Scientific Economic Model with Layered Liquidity Locking
           </p>
+          <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[oklch(0.75_0.12_220/0.3)] bg-[oklch(0.75_0.12_220/0.08)]">
+            <span className="text-xs font-medium text-ice-blue" style={{ fontFamily: 'var(--font-sub)' }}>
+              Total Locked Liquidity: 40% (1-4 Years)
+            </span>
+          </div>
           <div className="mt-4 mx-auto h-[1px] w-24 bg-gradient-to-r from-transparent via-ice-blue to-transparent" />
         </motion.div>
 

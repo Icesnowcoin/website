@@ -1,6 +1,6 @@
 /*
  * Design: Quantum Ice — Roadmap section
- * Vertical timeline with glowing nodes, four phases
+ * Vertical timeline with glowing nodes, four phases based on Whitepaper v3.0
  */
 import { motion } from 'framer-motion';
 import { Sprout, TrendingUp, Rocket, Crown } from 'lucide-react';
@@ -8,42 +8,189 @@ import { useLanguage } from '@/contexts/LanguageContext';
 import { ASSETS } from '@/lib/assets';
 
 export default function RoadmapSection() {
-  const { t } = useLanguage();
+  const { locale } = useLanguage();
 
-  const phases = [
-    {
-      icon: <Sprout className="w-5 h-5" />,
-      titleKey: 'roadmap.phase1.title',
-      timeKey: 'roadmap.phase1.time',
-      itemsKey: 'roadmap.phase1.items',
-      color: 'oklch(0.82 0.16 195)',
-      active: true,
+  const content = {
+    en: {
+      title: 'Development Roadmap',
+      subtitle: 'Whitepaper v3.0 - April 20, 2026',
+      phases: [
+        {
+          icon: Sprout,
+          title: '✓ Completed (April 2026)',
+          time: 'April 20, 2026',
+          items: [
+            'Contract deployment and testing',
+            'Proxy and implementation contract ownership fully released',
+            'LP liquidity layered locking (5% one year + 35% four years)',
+            'Team funds 20% locked (24-month linear release)',
+            'Official website and whitepaper launch',
+          ],
+          color: 'oklch(0.82 0.16 195)',
+          active: true,
+        },
+        {
+          icon: TrendingUp,
+          title: '⏳ In Progress (Q2 2026)',
+          time: 'Q2 2026',
+          items: [
+            'Security audit (audit firms contacted, quotes being evaluated)',
+            'ISC commemorative dynamic NFT prototype design',
+            'GameFi core framework development',
+            'Token listing applications',
+          ],
+          color: 'oklch(0.75 0.12 220)',
+          active: true,
+        },
+        {
+          icon: Rocket,
+          title: '📋 Planned (Q3 2026)',
+          time: 'Q3 2026',
+          items: [
+            'NFT minting functionality launch',
+            'GameFi beta release',
+            'Community DAO governance launch',
+            'APY staking mechanism launch',
+          ],
+          color: 'oklch(0.55 0.18 255)',
+          active: false,
+        },
+        {
+          icon: Crown,
+          title: '🚀 Future (Q4 2026+)',
+          time: 'Q4 2026 and Beyond',
+          items: [
+            'Cross-chain deployment evaluation',
+            'Advanced GameFi features',
+            'Ecosystem partnerships',
+            'Global community expansion',
+          ],
+          color: 'oklch(0.65 0.14 230)',
+          active: false,
+        },
+      ],
     },
-    {
-      icon: <TrendingUp className="w-5 h-5" />,
-      titleKey: 'roadmap.phase2.title',
-      timeKey: 'roadmap.phase2.time',
-      itemsKey: 'roadmap.phase2.items',
-      color: 'oklch(0.75 0.12 220)',
-      active: false,
+    zh: {
+      title: '开发路线图',
+      subtitle: '白皮书 v3.0 - 2026年4月20日',
+      phases: [
+        {
+          icon: Sprout,
+          title: '✓ 已完成 (2026年4月)',
+          time: '2026年4月20日',
+          items: [
+            '合约部署和测试',
+            'Proxy 和 Implementation 合约所有权完全释放',
+            'LP 流动性分层锁定 (5% 一年 + 35% 四年)',
+            '团队基金 20% 锁定 (24个月线性释放)',
+            '官方网站和白皮书发布',
+          ],
+          color: 'oklch(0.82 0.16 195)',
+          active: true,
+        },
+        {
+          icon: TrendingUp,
+          title: '⏳ 进行中 (Q2 2026)',
+          time: 'Q2 2026',
+          items: [
+            '安全审计 (已联系审计公司，评估报价中)',
+            'ISC 纪念动态 NFT 原型设计',
+            'GameFi 核心框架开发',
+            '代币上市申请',
+          ],
+          color: 'oklch(0.75 0.12 220)',
+          active: true,
+        },
+        {
+          icon: Rocket,
+          title: '📋 计划中 (Q3 2026)',
+          time: 'Q3 2026',
+          items: [
+            'NFT 铸造功能上线',
+            'GameFi 测试版发布',
+            '社区 DAO 治理启动',
+            'APY 质押机制启动',
+          ],
+          color: 'oklch(0.55 0.18 255)',
+          active: false,
+        },
+        {
+          icon: Crown,
+          title: '🚀 未来 (Q4 2026+)',
+          time: '2026年Q4及以后',
+          items: [
+            '跨链部署评估',
+            '高级 GameFi 功能',
+            '生态伙伴关系',
+            '全球社区扩展',
+          ],
+          color: 'oklch(0.65 0.14 230)',
+          active: false,
+        },
+      ],
     },
-    {
-      icon: <Rocket className="w-5 h-5" />,
-      titleKey: 'roadmap.phase3.title',
-      timeKey: 'roadmap.phase3.time',
-      itemsKey: 'roadmap.phase3.items',
-      color: 'oklch(0.55 0.18 255)',
-      active: false,
+    vi: {
+      title: 'Lộ trình Phát triển',
+      subtitle: 'Whitepaper v3.0 - 20 tháng 4 năm 2026',
+      phases: [
+        {
+          icon: Sprout,
+          title: '✓ Hoàn thành (Tháng 4 năm 2026)',
+          time: '20 tháng 4 năm 2026',
+          items: [
+            'Triển khai hợp đồng và thử nghiệm',
+            'Quyền sở hữu hợp đồng Proxy và Implementation được phát hành hoàn toàn',
+            'Khóa thanh khoản LP theo lớp (5% một năm + 35% bốn năm)',
+            'Quỹ nhóm 20% bị khóa (phát hành tuyến tính 24 tháng)',
+            'Phát hành trang web chính thức và whitepaper',
+          ],
+          color: 'oklch(0.82 0.16 195)',
+          active: true,
+        },
+        {
+          icon: TrendingUp,
+          title: '⏳ Đang tiến hành (Q2 2026)',
+          time: 'Q2 2026',
+          items: [
+            'Kiểm toán bảo mật (đã liên hệ các công ty kiểm toán)',
+            'Thiết kế nguyên mẫu ISC Commemorative Dynamic NFT',
+            'Phát triển khung GameFi cốt lõi',
+            'Ứng dụng niêm yết mã thông báo',
+          ],
+          color: 'oklch(0.75 0.12 220)',
+          active: true,
+        },
+        {
+          icon: Rocket,
+          title: '📋 Được lên kế hoạch (Q3 2026)',
+          time: 'Q3 2026',
+          items: [
+            'Ra mắt chức năng đúc NFT',
+            'Phát hành beta GameFi',
+            'Ra mắt quản trị DAO cộng đồng',
+            'Ra mắt cơ chế staking APY',
+          ],
+          color: 'oklch(0.55 0.18 255)',
+          active: false,
+        },
+        {
+          icon: Crown,
+          title: '🚀 Tương lai (Q4 2026+)',
+          time: 'Q4 2026 trở đi',
+          items: [
+            'Đánh giá triển khai đa chuỗi',
+            'Các tính năng GameFi nâng cao',
+            'Quan hệ đối tác hệ sinh thái',
+            'Mở rộng cộng đồng toàn cầu',
+          ],
+          color: 'oklch(0.65 0.14 230)',
+          active: false,
+        },
+      ],
     },
-    {
-      icon: <Crown className="w-5 h-5" />,
-      titleKey: 'roadmap.phase4.title',
-      timeKey: 'roadmap.phase4.time',
-      itemsKey: 'roadmap.phase4.items',
-      color: 'oklch(0.65 0.14 230)',
-      active: false,
-    },
-  ];
+  };
+
+  const dict = content[locale as keyof typeof content] || content.en;
 
   return (
     <section id="roadmap" className="relative py-24 sm:py-32 overflow-hidden">
@@ -63,10 +210,10 @@ export default function RoadmapSection() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl sm:text-4xl font-bold text-glow" style={{ fontFamily: 'var(--font-heading)', color: 'oklch(0.92 0.03 220)' }}>
-            {t('roadmap.title')}
+            {dict.title}
           </h2>
           <p className="mt-3 text-base sm:text-lg" style={{ fontFamily: 'var(--font-sub)', color: 'oklch(0.65 0.08 220)' }}>
-            {t('roadmap.subtitle')}
+            {dict.subtitle}
           </p>
           <div className="mt-4 mx-auto h-[1px] w-24 bg-gradient-to-r from-transparent via-ice-blue to-transparent" />
         </motion.div>
@@ -76,8 +223,8 @@ export default function RoadmapSection() {
           {/* Vertical line */}
           <div className="absolute left-6 sm:left-8 top-0 bottom-0 w-[2px] bg-gradient-to-b from-[oklch(0.82_0.16_195/0.5)] via-[oklch(0.75_0.12_220/0.3)] to-[oklch(0.55_0.18_255/0.1)]" />
 
-          {phases.map((phase, i) => {
-            const items = t(phase.itemsKey).split('|');
+          {dict.phases.map((phase, i) => {
+            const IconComponent = phase.icon;
             return (
               <motion.div
                 key={i}
@@ -96,7 +243,7 @@ export default function RoadmapSection() {
                     boxShadow: phase.active ? `0 0 15px ${phase.color}` : 'none',
                   }}
                 >
-                  <div style={{ color: phase.color }}>{phase.icon}</div>
+                  <IconComponent className="w-4 h-4" style={{ color: phase.color }} />
                 </div>
 
                 {/* Card */}
@@ -109,7 +256,7 @@ export default function RoadmapSection() {
                       className="text-lg font-bold"
                       style={{ fontFamily: 'var(--font-heading)', color: phase.color }}
                     >
-                      {t(phase.titleKey)}
+                      {phase.title}
                     </h3>
                     <span
                       className="text-xs px-2 py-0.5 rounded-full"
@@ -119,11 +266,11 @@ export default function RoadmapSection() {
                         backgroundColor: `color-mix(in oklch, ${phase.color}, transparent 90%)`,
                       }}
                     >
-                      {t(phase.timeKey)}
+                      {phase.time}
                     </span>
                   </div>
                   <ul className="space-y-2">
-                    {items.map((item, j) => (
+                    {phase.items.map((item, j) => (
                       <li key={j} className="flex items-start gap-2 text-sm" style={{ fontFamily: 'var(--font-body)', color: 'oklch(0.65 0.02 220)' }}>
                         <div className="w-1.5 h-1.5 rounded-full mt-1.5 shrink-0" style={{ backgroundColor: phase.color, opacity: 0.6 }} />
                         {item}

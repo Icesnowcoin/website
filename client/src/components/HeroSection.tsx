@@ -112,6 +112,11 @@ export default function HeroSection() {
             >
               {t('hero.subtitle')}
             </p>
+            <div className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-[oklch(0.75_0.12_220/0.3)] bg-[oklch(0.75_0.12_220/0.08)]">
+              <span className="text-xs font-medium text-ice-blue" style={{ fontFamily: 'var(--font-sub)' }}>
+                ✓ Fully Decentralized • No Admin Privileges • Community Governed
+              </span>
+            </div>
           </motion.div>
 
           {/* Description */}
@@ -119,11 +124,32 @@ export default function HeroSection() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5 }}
-            className="mt-5 text-sm sm:text-base leading-relaxed max-w-2xl"
+            className="mt-6 text-sm sm:text-base leading-relaxed max-w-2xl"
             style={{ fontFamily: 'var(--font-body)', color: 'oklch(0.65 0.02 220)' }}
           >
             {t('hero.description')}
           </motion.p>
+          
+          {/* Whitepaper 3.0 Highlights */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.55 }}
+            className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-2xl"
+          >
+            <div className="p-3 rounded-lg border border-[oklch(0.75_0.12_220/0.2)] bg-[oklch(0.75_0.12_220/0.05)]">
+              <div className="text-xs font-semibold text-ice-blue mb-1" style={{ fontFamily: 'var(--font-sub)' }}>Contract Ownership</div>
+              <div className="text-sm font-bold text-foreground" style={{ fontFamily: 'var(--font-mono)' }}>Permanently Released</div>
+            </div>
+            <div className="p-3 rounded-lg border border-[oklch(0.75_0.12_220/0.2)] bg-[oklch(0.75_0.12_220/0.05)]">
+              <div className="text-xs font-semibold text-ice-blue mb-1" style={{ fontFamily: 'var(--font-sub)' }}>Liquidity Lock</div>
+              <div className="text-sm font-bold text-foreground" style={{ fontFamily: 'var(--font-mono)' }}>40% Locked (1-4 Years)</div>
+            </div>
+            <div className="p-3 rounded-lg border border-[oklch(0.75_0.12_220/0.2)] bg-[oklch(0.75_0.12_220/0.05)]">
+              <div className="text-xs font-semibold text-ice-blue mb-1" style={{ fontFamily: 'var(--font-sub)' }}>Ecosystem</div>
+              <div className="text-sm font-bold text-foreground" style={{ fontFamily: 'var(--font-mono)' }}>NFT + GameFi</div>
+            </div>
+          </motion.div>
 
           {/* Countdown */}
           <motion.div
@@ -159,6 +185,16 @@ export default function HeroSection() {
               style={{ fontFamily: 'var(--font-heading)' }}
             >
               {t('hero.learnMore')}
+              <ArrowRight className="w-4 h-4" />
+            </a>
+            <a
+              href="https://icesnowcoin.org"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-[oklch(0.75_0.12_220/0.3)] text-ice-blue font-medium text-sm hover:bg-[oklch(0.75_0.12_220/0.1)] transition-all duration-300"
+              style={{ fontFamily: 'var(--font-heading)' }}
+            >
+              Whitepaper v3.0
               <ArrowRight className="w-4 h-4" />
             </a>
           </motion.div>
