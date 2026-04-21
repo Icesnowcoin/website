@@ -88,9 +88,9 @@ export default function HeroSection() {
             transition={{ delay: 0.2 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[oklch(0.75_0.12_220/0.3)] bg-[oklch(0.75_0.12_220/0.08)] mb-6"
           >
-            <Clock className="w-3.5 h-3.5 text-ice-blue" />
-            <span className="text-xs font-medium text-ice-blue" style={{ fontFamily: 'var(--font-sub)' }}>
-              {t('hero.presale')} — {t('hero.presaleDate')}
+            <Zap className="w-3.5 h-3.5 text-electric-cyan" />
+            <span className="text-xs font-medium text-electric-cyan" style={{ fontFamily: 'var(--font-sub)' }}>
+              {t('hero.presaleOpen')} — {t('hero.presaleDate')}
             </span>
           </motion.div>
 
@@ -172,11 +172,11 @@ export default function HeroSection() {
               href={LINKS.pancakeswap}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-ice-blue text-[oklch(0.10_0.02_250)] font-semibold text-sm hover:bg-electric-cyan transition-all duration-300 border-glow"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-electric-cyan text-[oklch(0.10_0.02_250)] font-semibold text-sm hover:bg-ice-blue transition-all duration-300 border-glow"
               style={{ fontFamily: 'var(--font-heading)' }}
             >
               <Zap className="w-4 h-4" />
-              {t('hero.buyNow')}
+              {t('hero.tradeNow')}
             </a>
             <a
               href="#about"
