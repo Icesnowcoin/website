@@ -18,7 +18,7 @@ const DEX_PLATFORMS: DexPlatform[] = [
   {
     name: 'PancakeSwap',
     url: 'https://pancakeswap.finance',
-    logo: 'https://tokens.pancakeswap.finance/images/pancakeswap-token.png',
+    logo: 'https://assets.pancakeswap.finance/web/logo.png',
     description: 'Leading BSC DEX',
   },
   {
