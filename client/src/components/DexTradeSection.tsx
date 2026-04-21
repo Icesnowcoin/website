@@ -1,11 +1,11 @@
 /**
  * DEX Trade Section
- * Displays 16 decentralized exchange platforms where users can trade ISC
- * Uses embedded SVG logos for 100% reliability
+ * Collapsible card showing 16 decentralized exchange platforms where users can trade ISC
  */
 
-import { motion } from 'framer-motion';
-import { ExternalLink } from 'lucide-react';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ExternalLink, ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface DexPlatform {
@@ -18,10 +18,10 @@ interface DexPlatform {
 // SVG Logo Components
 const PancakeSwapLogo = () => (
   <svg viewBox="0 0 200 200" className="w-12 h-12">
-    <circle cx="100" cy="100" r="95" fill="#1D1D1D"/>
-    <path d="M100 40 C120 50 130 70 130 90 C130 110 120 130 100 140 C80 130 70 110 70 90 C70 70 80 50 100 40" fill="#FFB800"/>
-    <circle cx="85" cy="85" r="8" fill="#1D1D1D"/>
-    <circle cx="115" cy="85" r="8" fill="#1D1D1D"/>
+    <circle cx="100" cy="100" r="95" fill="#FFB800"/>
+    <path d="M100 40 C120 50 130 70 130 90 C130 110 120 130 100 140 C80 130 70 110 70 90 C70 70 80 50 100 40" fill="#1D1D1D"/>
+    <circle cx="85" cy="85" r="8" fill="#FFB800"/>
+    <circle cx="115" cy="85" r="8" fill="#FFB800"/>
   </svg>
 );
 
@@ -45,7 +45,7 @@ const ApeSwapLogo = () => (
 const MDEXLogo = () => (
   <svg viewBox="0 0 200 200" className="w-12 h-12">
     <circle cx="100" cy="100" r="95" fill="#00D084"/>
-    <path d="M100 50 L130 75 L130 125 L100 150 L70 125 L70 75 Z" fill="white"/>
+    <path d="M100 50 L150 75 L150 125 L100 150 L50 125 L50 75 Z" fill="white"/>
   </svg>
 );
 
@@ -246,7 +246,8 @@ const DEX_PLATFORMS: DexPlatform[] = [
 const ISC_CONTRACT = '0x11229a3f976566FA8a3ba462C432122f3B8876f6';
 
 export default function DexTradeSection() {
-  const { t, locale } = useLanguage();
+  const [isExpanded, setIsExpanded] = useState(false);
+  const { locale } = useLanguage();
 
   const translations: Record<string, Record<string, string>> = {
     sectionTitle: {
@@ -255,9 +256,9 @@ export default function DexTradeSection() {
       'vi': 'Giao dịch ISC trên DEX',
     },
     sectionDesc: {
-      'zh': '在多个去中心化交易所上交易 ISC。使用合约地址搜索并交易。',
-      'en': 'Trade ISC on multiple decentralized exchanges. Search and trade using the contract address.',
-      'vi': 'Giao dịch ISC trên nhiều sàn giao dịch phi tập trung. Tìm kiếm và giao dịch bằng địa chỉ hợp đồng.',
+      'zh': '在 16 个去中心化交易所上交易 ISC。使用合约地址搜索并交易。',
+      'en': 'Trade ISC on 16 decentralized exchanges. Search and trade using the contract address.',
+      'vi': 'Giao dịch ISC trên 16 sàn giao dịch phi tập trung. Tìm kiếm và giao dịch bằng địa chỉ hợp đồng.',
     },
     contractLabel: {
       'zh': '合约地址',
@@ -269,12 +270,24 @@ export default function DexTradeSection() {
       'en': 'Click to copy',
       'vi': 'Nhấp để sao chép',
     },
+    expandButton: {
+      'zh': '展开交易所列表',
+      'en': 'View All Exchanges',
+      'vi': 'Xem tất cả sàn giao dịch',
+    },
+    collapseButton: {
+      'zh': '收起交易所列表',
+      'en': 'Hide Exchanges',
+      'vi': 'Ẩn sàn giao dịch',
+    },
   };
 
   const sectionTitle = translations.sectionTitle[locale] || 'Trade ISC on DEX';
-  const sectionDesc = translations.sectionDesc[locale] || 'Trade ISC on multiple decentralized exchanges.';
+  const sectionDesc = translations.sectionDesc[locale] || 'Trade ISC on 16 decentralized exchanges.';
   const contractLabel = translations.contractLabel[locale] || 'Contract Address';
   const copyTooltip = translations.copyTooltip[locale] || 'Click to copy';
+  const expandButton = translations.expandButton[locale] || 'View All Exchanges';
+  const collapseButton = translations.collapseButton[locale] || 'Hide Exchanges';
 
   const handleCopyContract = () => {
     navigator.clipboard.writeText(ISC_CONTRACT);
@@ -282,13 +295,13 @@ export default function DexTradeSection() {
 
   return (
     <section className="py-20 px-4 bg-gradient-to-b from-background to-background/50">
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-blue-500 bg-clip-text text-transparent">
             {sectionTitle}
@@ -298,70 +311,106 @@ export default function DexTradeSection() {
           </p>
         </motion.div>
 
-        {/* Contract Address */}
+        {/* Collapsible Card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="mb-12 bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 rounded-lg p-6 max-w-2xl mx-auto"
+          className="bg-gradient-to-r from-cyan-500/10 to-blue-500/10 border border-cyan-500/30 rounded-lg overflow-hidden"
         >
-          <p className="text-gray-400 text-sm mb-2">{contractLabel}</p>
-          <button
-            onClick={handleCopyContract}
-            className="w-full text-left p-3 bg-background/50 border border-cyan-500/20 rounded-lg hover:border-cyan-500/50 transition-all group cursor-pointer"
-            title={copyTooltip}
-          >
-            <code className="text-cyan-400 text-sm font-mono group-hover:text-cyan-300 transition-colors">
-              {ISC_CONTRACT}
-            </code>
-          </button>
-        </motion.div>
-
-        {/* DEX Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {DEX_PLATFORMS.map((dex, index) => (
-            <motion.a
-              key={dex.name}
-              href={dex.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.05 }}
-              whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(34, 197, 255, 0.2)' }}
-              className="group relative bg-gradient-to-br from-cyan-500/5 to-blue-500/5 border border-cyan-500/20 rounded-xl p-6 hover:border-cyan-500/50 transition-all duration-300 overflow-hidden"
+          {/* Contract Address Section */}
+          <div className="p-6 border-b border-cyan-500/20">
+            <p className="text-gray-400 text-sm mb-2">{contractLabel}</p>
+            <button
+              onClick={handleCopyContract}
+              className="w-full text-left p-3 bg-background/50 border border-cyan-500/20 rounded-lg hover:border-cyan-500/50 transition-all group cursor-pointer"
+              title={copyTooltip}
             >
-              {/* Background glow */}
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <code className="text-cyan-400 text-sm font-mono group-hover:text-cyan-300 transition-colors">
+                {ISC_CONTRACT}
+              </code>
+            </button>
+          </div>
 
-              {/* Content */}
-              <div className="relative z-10">
-                {/* Logo */}
-                <div className="mb-4 flex justify-center">
-                  <div className="p-3 bg-background/50 rounded-lg group-hover:bg-background transition-colors">
-                    {dex.logo}
-                  </div>
+          {/* Collapsible Header */}
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="w-full p-6 flex items-center justify-between hover:bg-cyan-500/5 transition-colors group"
+          >
+            <div className="text-left">
+              <h3 className="text-lg font-semibold text-white group-hover:text-cyan-300 transition-colors">
+                {isExpanded ? collapseButton : expandButton}
+              </h3>
+              <p className="text-sm text-gray-400 mt-1">
+                {DEX_PLATFORMS.length} {locale === 'zh' ? '个交易所' : locale === 'vi' ? 'sàn giao dịch' : 'exchanges'}
+              </p>
+            </div>
+            <motion.div
+              animate={{ rotate: isExpanded ? 180 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ChevronDown className="text-cyan-400" size={24} />
+            </motion.div>
+          </button>
+
+          {/* Expandable DEX Grid */}
+          <AnimatePresence>
+            {isExpanded && (
+              <motion.div
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                transition={{ duration: 0.3 }}
+                className="border-t border-cyan-500/20 overflow-hidden"
+              >
+                <div className="p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                  {DEX_PLATFORMS.map((dex, index) => (
+                    <motion.a
+                      key={dex.name}
+                      href={dex.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                      whileHover={{ y: -4 }}
+                      className="group relative bg-gradient-to-br from-cyan-500/5 to-blue-500/5 border border-cyan-500/20 rounded-lg p-4 hover:border-cyan-500/50 transition-all duration-300 overflow-hidden"
+                    >
+                      {/* Background glow */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-cyan-500/5 to-blue-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+                      {/* Content */}
+                      <div className="relative z-10">
+                        {/* Logo */}
+                        <div className="mb-3 flex justify-center">
+                          <div className="p-2 bg-background/50 rounded-lg group-hover:bg-background transition-colors">
+                            {dex.logo}
+                          </div>
+                        </div>
+
+                        {/* Name */}
+                        <h4 className="text-sm font-semibold text-white text-center mb-1 group-hover:text-cyan-300 transition-colors">
+                          {dex.name}
+                        </h4>
+
+                        {/* Description */}
+                        <p className="text-xs text-gray-400 text-center mb-3">
+                          {dex.description}
+                        </p>
+
+                        {/* Visit Link */}
+                        <div className="flex items-center justify-center gap-1 text-cyan-400 group-hover:text-cyan-300 transition-colors text-xs">
+                          <span>Visit</span>
+                          <ExternalLink size={12} />
+                        </div>
+                      </div>
+                    </motion.a>
+                  ))}
                 </div>
-
-                {/* Name */}
-                <h3 className="text-lg font-semibold text-white text-center mb-2 group-hover:text-cyan-300 transition-colors">
-                  {dex.name}
-                </h3>
-
-                {/* Description */}
-                <p className="text-sm text-gray-400 text-center mb-4">
-                  {dex.description}
-                </p>
-
-                {/* Visit Link */}
-                <div className="flex items-center justify-center gap-2 text-cyan-400 group-hover:text-cyan-300 transition-colors">
-                  <span className="text-sm font-medium">Visit</span>
-                  <ExternalLink size={16} />
-                </div>
-              </div>
-            </motion.a>
-          ))}
-        </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </section>
   );
