@@ -18,13 +18,13 @@ const DEX_PLATFORMS: DexPlatform[] = [
   {
     name: 'PancakeSwap',
     url: 'https://pancakeswap.finance',
-    logo: 'https://tokens.pancakeswap.finance/images/pancakeswap-token.png',
+    logo: 'https://raw.githubusercontent.com/pancakeswap/pancake-frontend/master/public/images/tokens/cake.png',
     description: 'Leading BSC DEX',
   },
   {
     name: 'Biswap',
     url: 'https://biswap.org',
-    logo: 'https://assets.coingecko.com/coins/images/16959/small/biswap-logo.png',
+    logo: 'https://raw.githubusercontent.com/biswap-dex/biswap-frontend/master/public/images/tokens/bsw.png',
     description: 'BSC Exchange',
   },
   {
@@ -42,7 +42,7 @@ const DEX_PLATFORMS: DexPlatform[] = [
   {
     name: 'BabySwap',
     url: 'https://babyswap.finance',
-    logo: 'https://assets.coingecko.com/coins/images/14361/small/baby.png',
+    logo: 'https://raw.githubusercontent.com/babyswap-bsc/babyswap-frontend/main/public/images/tokens/baby.png',
     description: 'Community DEX',
   },
   {
@@ -78,7 +78,7 @@ const DEX_PLATFORMS: DexPlatform[] = [
   {
     name: 'CowSwap',
     url: 'https://cow.fi',
-    logo: 'https://assets.coingecko.com/coins/images/24384/small/cow.png',
+    logo: 'https://raw.githubusercontent.com/cowprotocol/token-lists/main/src/public/images/cow.png',
     description: 'Intent-based DEX',
   },
   {
@@ -90,7 +90,7 @@ const DEX_PLATFORMS: DexPlatform[] = [
   {
     name: '1inch',
     url: 'https://app.1inch.io',
-    logo: 'https://assets.coingecko.com/coins/images/13469/small/1inch-token.png',
+    logo: 'https://raw.githubusercontent.com/1inch/token-icons/master/images/1inch.png',
     description: 'DEX Aggregator',
   },
   {
@@ -102,13 +102,13 @@ const DEX_PLATFORMS: DexPlatform[] = [
   {
     name: 'OpenOcean',
     url: 'https://openocean.finance',
-    logo: 'https://assets.coingecko.com/coins/images/14314/small/openocean.png',
+    logo: 'https://raw.githubusercontent.com/openocean-finance/openocean-frontend/main/public/images/tokens/ooe.png',
     description: 'DEX Aggregator',
   },
   {
     name: 'KyberSwap',
     url: 'https://kyberswap.com',
-    logo: 'https://assets.coingecko.com/coins/images/14490/small/kyberswap.png',
+    logo: 'https://raw.githubusercontent.com/kybernetwork/kyberswap-interface/main/public/images/tokens/knc.png',
     description: 'Multi-chain DEX',
   },
 ];
