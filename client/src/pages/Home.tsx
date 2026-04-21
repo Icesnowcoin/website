@@ -12,6 +12,7 @@ import DexTradeSection from '@/components/DexTradeSection';
 import EcosystemShowcase from '@/components/EcosystemShowcase';
 import SecurityAndGovernance from '@/components/SecurityAndGovernance';
 import RoadmapSection from '@/components/RoadmapSection';
+import VideoSection from '@/components/VideoSection';
 import PriceChart from '@/components/PriceChart';
 import Footer from '@/components/Footer';
 
@@ -45,6 +46,8 @@ export default function Home() {
         <SecurityAndGovernance />
         <div className="section-divider" />
         <RoadmapSection />
+        <div className="section-divider" />
+        <VideoSection />
       </main>
 
       {/* Footer */}
