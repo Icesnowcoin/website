@@ -5,10 +5,10 @@
 import Navbar from '@/components/Navbar';
 import ParticleField from '@/components/ParticleField';
 import HeroSection from '@/components/HeroSection';
-import DexTradeSection from '@/components/DexTradeSection';
 import CommunitySection from '@/components/CommunitySection';
 import AboutSection from '@/components/AboutSection';
 import TokenomicsSection from '@/components/TokenomicsSection';
+import DexTradeSection from '@/components/DexTradeSection';
 import EcosystemShowcase from '@/components/EcosystemShowcase';
 import SecurityAndGovernance from '@/components/SecurityAndGovernance';
 import RoadmapSection from '@/components/RoadmapSection';
@@ -29,9 +29,9 @@ export default function Home() {
       <main className="relative z-10">
         <HeroSection />
         <div className="section-divider" />
-        <DexTradeSection />
-        <div className="section-divider" />
         <CommunitySection />
+        <div className="section-divider" />
+        <DexTradeSection />
         <div className="section-divider" />
         <AboutSection />
         <div className="section-divider" />

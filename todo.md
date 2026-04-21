@@ -56,9 +56,9 @@
 - [x] 完善中英文双语内容
 
 
-## 预售和 DEX 交易集成
+## DEX 交易所优化
 
-- [x] 将预售文案改为"开放预售"
-- [x] 创建 DEX 交易平台展示组件（16 个 DEX）
-- [x] 集成 DEX 组件到主页预售下方
-- [x] 验证所有 DEX 按鑒链接正确
+- [x] 从 DEX 列表中删除 MDEX、BabySwap、dYdX、1inch
+- [x] 重新创建 DexTradeSection 组件，只包含 12 个 DEX
+- [x] 将 DexTradeSection 集成到主页
+- [ ] 发布更新
