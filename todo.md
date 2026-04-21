@@ -62,3 +62,10 @@
 - [x] 重新创建 DexTradeSection 组件，只包含 12 个 DEX
 - [x] 将 DexTradeSection 集成到主页
 - [x] 发布更新
+
+## 主页清理
+
+- [x] 删除 VideoSection 组件（页面底部视频）
+- [x] 删除 CommunitySection 中的视频和社区招募按钮
+- [x] 从 Home.tsx 中移除 VideoSection 和 CommunitySection 的导入
+- [x] 更新主页布局，移除相关的 section-divider
