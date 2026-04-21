@@ -10,7 +10,7 @@ import { useLanguage } from '@/contexts/LanguageContext';
 interface DexPlatform {
   name: string;
   url: string;
-  logo: string;
+  logo: React.ReactNode;
   description: string;
 }
 
@@ -18,97 +18,187 @@ const DEX_PLATFORMS: DexPlatform[] = [
   {
     name: 'PancakeSwap',
     url: 'https://pancakeswap.finance',
-    logo: '🥞',
+    logo: (
+      <svg viewBox="0 0 200 200" className="w-12 h-12" fill="none">
+        <circle cx="100" cy="100" r="95" fill="#FFD700" />
+        <path d="M100 50 L130 80 L100 110 L70 80 Z" fill="#1D1D1D" />
+        <path d="M100 110 L130 140 L100 170 L70 140 Z" fill="#1D1D1D" />
+      </svg>
+    ),
     description: 'Leading BSC DEX',
   },
   {
     name: 'Biswap',
     url: 'https://biswap.org',
-    logo: '🔄',
+    logo: (
+      <svg viewBox="0 0 200 200" className="w-12 h-12" fill="none">
+        <circle cx="100" cy="100" r="95" fill="#00D4FF" />
+        <path d="M70 100 L100 70 L130 100 L100 130 Z" fill="#1D1D1D" strokeWidth="2" stroke="#1D1D1D" />
+      </svg>
+    ),
     description: 'BSC Exchange',
   },
   {
     name: 'ApeSwap',
     url: 'https://apeswap.finance',
-    logo: '🦍',
+    logo: (
+      <svg viewBox="0 0 200 200" className="w-12 h-12" fill="none">
+        <circle cx="100" cy="100" r="95" fill="#FFB800" />
+        <path d="M80 70 Q100 60 120 70 Q110 85 100 90 Q90 85 80 70" fill="#1D1D1D" />
+        <path d="M70 100 Q70 120 100 130 Q130 120 130 100" fill="#1D1D1D" />
+      </svg>
+    ),
     description: 'Multi-chain DEX',
   },
   {
     name: 'MDEX',
     url: 'https://mdex.com',
-    logo: '📊',
+    logo: (
+      <svg viewBox="0 0 200 200" className="w-12 h-12" fill="none">
+        <circle cx="100" cy="100" r="95" fill="#00B26F" />
+        <path d="M70 80 L100 60 L130 80 L130 120 L100 140 L70 120 Z" fill="#1D1D1D" />
+      </svg>
+    ),
     description: 'Hybrid Exchange',
   },
   {
     name: 'BabySwap',
     url: 'https://babyswap.finance',
-    logo: '👶',
+    logo: (
+      <svg viewBox="0 0 200 200" className="w-12 h-12" fill="none">
+        <circle cx="100" cy="100" r="95" fill="#FF6B9D" />
+        <circle cx="75" cy="85" r="12" fill="#1D1D1D" />
+        <circle cx="125" cy="85" r="12" fill="#1D1D1D" />
+        <path d="M80 110 Q100 125 120 110" stroke="#1D1D1D" strokeWidth="3" fill="none" />
+      </svg>
+    ),
     description: 'Community DEX',
   },
   {
     name: 'Nomiswap',
     url: 'https://nomiswap.io',
-    logo: '🌊',
+    logo: (
+      <svg viewBox="0 0 200 200" className="w-12 h-12" fill="none">
+        <circle cx="100" cy="100" r="95" fill="#0066FF" />
+        <path d="M100 60 L140 100 L100 140 L60 100 Z" fill="none" stroke="#FFFFFF" strokeWidth="4" />
+        <circle cx="100" cy="100" r="15" fill="#FFFFFF" />
+      </svg>
+    ),
     description: 'Stable Swap',
   },
   {
     name: 'Thena',
     url: 'https://thena.fi',
-    logo: '⚡',
+    logo: (
+      <svg viewBox="0 0 200 200" className="w-12 h-12" fill="none">
+        <circle cx="100" cy="100" r="95" fill="#00D4FF" />
+        <path d="M100 50 L150 100 L100 150 L50 100 Z" fill="#1D1D1D" />
+        <path d="M100 75 L125 100 L100 125 L75 100 Z" fill="#00D4FF" />
+      </svg>
+    ),
     description: 'Optimized DEX',
   },
   {
     name: 'Uniswap',
     url: 'https://app.uniswap.org',
-    logo: '🦄',
+    logo: (
+      <svg viewBox="0 0 200 200" className="w-12 h-12" fill="none">
+        <circle cx="100" cy="100" r="95" fill="#FF007A" />
+        <path d="M100 50 L140 140 L60 140 Z" fill="#FFFFFF" />
+      </svg>
+    ),
     description: 'Multi-chain DEX',
   },
   {
     name: 'SushiSwap',
     url: 'https://www.sushi.com',
-    logo: '🍣',
+    logo: (
+      <svg viewBox="0 0 200 200" className="w-12 h-12" fill="none">
+        <circle cx="100" cy="100" r="95" fill="#FA52A0" />
+        <path d="M70 80 L100 60 L130 80 L130 120 L100 140 L70 120 Z" fill="#FFFFFF" />
+      </svg>
+    ),
     description: 'Community DEX',
   },
   {
     name: 'Curve',
     url: 'https://curve.fi',
-    logo: '📈',
+    logo: (
+      <svg viewBox="0 0 200 200" className="w-12 h-12" fill="none">
+        <circle cx="100" cy="100" r="95" fill="#1E90FF" />
+        <path d="M60 120 Q100 60 140 120" stroke="#FFFFFF" strokeWidth="8" fill="none" strokeLinecap="round" />
+      </svg>
+    ),
     description: 'Stablecoin DEX',
   },
   {
     name: 'CowSwap',
     url: 'https://cow.fi',
-    logo: '🐄',
+    logo: (
+      <svg viewBox="0 0 200 200" className="w-12 h-12" fill="none">
+        <circle cx="100" cy="100" r="95" fill="#623B1D" />
+        <circle cx="80" cy="80" r="12" fill="#FFFFFF" />
+        <circle cx="120" cy="80" r="12" fill="#FFFFFF" />
+        <path d="M75 110 L125 110" stroke="#FFFFFF" strokeWidth="3" />
+      </svg>
+    ),
     description: 'Intent-based DEX',
   },
   {
     name: 'dYdX',
     url: 'https://dydx.exchange',
-    logo: '📉',
+    logo: (
+      <svg viewBox="0 0 200 200" className="w-12 h-12" fill="none">
+        <circle cx="100" cy="100" r="95" fill="#6966FF" />
+        <path d="M70 70 L130 130" stroke="#FFFFFF" strokeWidth="8" strokeLinecap="round" />
+        <path d="M130 70 L70 130" stroke="#FFFFFF" strokeWidth="8" strokeLinecap="round" />
+      </svg>
+    ),
     description: 'Trading Platform',
   },
   {
     name: '1inch',
     url: 'https://app.1inch.io',
-    logo: '1️⃣',
+    logo: (
+      <svg viewBox="0 0 200 200" className="w-12 h-12" fill="none">
+        <circle cx="100" cy="100" r="95" fill="#1C3A70" />
+        <text x="100" y="120" fontSize="60" fontWeight="bold" fill="#FFD700" textAnchor="middle">1</text>
+      </svg>
+    ),
     description: 'DEX Aggregator',
   },
   {
     name: 'ParaSwap',
     url: 'https://app.paraswap.io',
-    logo: '🔀',
+    logo: (
+      <svg viewBox="0 0 200 200" className="w-12 h-12" fill="none">
+        <circle cx="100" cy="100" r="95" fill="#0066FF" />
+        <path d="M80 70 L100 90 L120 70" stroke="#FFFFFF" strokeWidth="4" fill="none" />
+        <path d="M80 130 L100 110 L120 130" stroke="#FFFFFF" strokeWidth="4" fill="none" />
+      </svg>
+    ),
     description: 'DEX Aggregator',
   },
   {
     name: 'OpenOcean',
     url: 'https://openocean.finance',
-    logo: '🌊',
+    logo: (
+      <svg viewBox="0 0 200 200" className="w-12 h-12" fill="none">
+        <circle cx="100" cy="100" r="95" fill="#00A8E8" />
+        <path d="M100 50 Q140 75 140 100 Q140 125 100 150 Q60 125 60 100 Q60 75 100 50" fill="#FFFFFF" />
+      </svg>
+    ),
     description: 'DEX Aggregator',
   },
   {
     name: 'KyberSwap',
     url: 'https://kyberswap.com',
-    logo: '💎',
+    logo: (
+      <svg viewBox="0 0 200 200" className="w-12 h-12" fill="none">
+        <circle cx="100" cy="100" r="95" fill="#31CB9E" />
+        <path d="M70 100 L100 60 L130 100 L100 140 Z" fill="#1D1D1D" />
+      </svg>
+    ),
     description: 'Multi-chain DEX',
   },
 ];
@@ -233,7 +323,7 @@ export default function DexTradeSection() {
 
               <div className="relative z-10">
                 {/* Logo */}
-                <div className="text-3xl mb-3 group-hover:scale-110 transition-transform duration-300">
+                <div className="mb-3 group-hover:scale-110 transition-transform duration-300 flex items-center justify-center h-16">
                   {dex.logo}
                 </div>
 
