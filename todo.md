@@ -61,4 +61,4 @@
 - [x] 从 DEX 列表中删除 MDEX、BabySwap、dYdX、1inch
 - [x] 重新创建 DexTradeSection 组件，只包含 12 个 DEX
 - [x] 将 DexTradeSection 集成到主页
-- [ ] 发布更新
+- [x] 发布更新

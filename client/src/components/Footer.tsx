@@ -24,7 +24,7 @@ export default function Footer() {
   return (
     <footer className="relative border-t border-[oklch(0.75_0.12_220/0.1)]">
       <div className="container mx-auto py-12 sm:py-16">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
@@ -84,15 +84,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Compliance */}
-          <div>
-            <h4 className="text-sm font-semibold mb-4" style={{ fontFamily: 'var(--font-heading)', color: 'oklch(0.80 0.04 220)' }}>
-              {t('footer.legal')}
-            </h4>
-            <p className="text-xs leading-relaxed" style={{ fontFamily: 'var(--font-body)', color: 'oklch(0.45 0.02 220)' }}>
-              {t('footer.compliance')}
-            </p>
-          </div>
+
         </div>
 
         {/* Bottom bar */}
