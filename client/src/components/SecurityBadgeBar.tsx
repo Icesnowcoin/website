@@ -6,9 +6,6 @@ import { motion } from 'framer-motion';
 import { Lock, Vote, Mail } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-// Suppress motion.a DOM warning
-motion.a = motion.div as any;
-
 interface Badge {
   icon: React.ReactNode;
   label: string;
