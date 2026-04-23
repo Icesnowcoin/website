@@ -68,3 +68,12 @@
 - [x] 更新预售结束日期为 2026-04-30
 - [x] 更新预售徽章文本为 "Presale Live Now — Ends April 30, 2026"
 - [x] 倒计时自动更新为距离 4 月 30 日的剩余时间
+
+## 安全徽章和信息展示
+
+- [x] 创建 SecurityBadgeBar 组件 - Hero 下方的 3 个徽章（LP Locked、DAO Governance、Email）
+- [x] 创建 SecurityTransparency 组件 - 2x2 网格卡片（Contract Security、Ownership、Liquidity Lock、Team Vesting）+ 底部横幅
+- [x] 将 SecurityBadgeBar 集成到 Home.tsx（Hero 下方）
+- [x] 将 SecurityTransparency 集成到 Home.tsx（Contract Info 和 Tokenomics 之间）
+- [x] 更新 Footer 第四列为 Infrastructure，添加完整链接列表和联系信息
+- [ ] 为新组件编写 Vitest 单元测试 (需要配置 jsdom 环境和 @testing-library/react)

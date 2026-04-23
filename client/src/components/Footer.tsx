@@ -21,10 +21,19 @@ export default function Footer() {
     { label: 'X / Twitter', href: LINKS.twitter, external: true },
   ];
 
+  const infrastructure = [
+    { label: 'Smart Contract', href: 'https://bscscan.com/address/0x11229a3f976566FA8a3ba462C432122f3B8876f6', external: true },
+    { label: 'Source Code', href: 'https://bscscan.com/address/0xf74f38cb35255b85514c49255f0ea29a013cb618#code', external: true },
+    { label: 'LP Lock (UNCX)', href: 'https://app.uncx.network/lockers/manage/lockers-v3?service=edit&wallet=0xf946A6521D201F2C757562Add139E5635e2a80b3&chain=56', external: true },
+    { label: 'Team Vesting', href: 'https://app.team.finance/vesting', external: true },
+    { label: 'DAO Governance', href: 'https://snapshot.org/#/icesnowcoin.eth', external: true },
+    { label: 'Whitepaper', href: LINKS.whitepaper, external: true },
+  ];
+
   return (
     <footer className="relative border-t border-[oklch(0.75_0.12_220/0.1)]">
       <div className="container mx-auto py-12 sm:py-16">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
           {/* Brand */}
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
@@ -81,6 +90,39 @@ export default function Footer() {
                   </a>
                 </li>
               ))}
+            </ul>
+          </div>
+
+          {/* Infrastructure */}
+          <div>
+            <h4 className="text-sm font-semibold mb-4" style={{ fontFamily: 'var(--font-heading)', color: 'oklch(0.80 0.04 220)' }}>
+              Infrastructure
+            </h4>
+            <ul className="space-y-2.5">
+              {infrastructure.map((link, i) => (
+                <li key={i}>
+                  <a
+                    href={link.href}
+                    target={link.external ? '_blank' : undefined}
+                    rel={link.external ? 'noopener noreferrer' : undefined}
+                    className="text-sm flex items-center gap-1 hover:text-ice-blue transition-colors"
+                    style={{ fontFamily: 'var(--font-sub)', color: 'oklch(0.55 0.02 220)' }}
+                  >
+                    {link.label}
+                    {link.external && <ExternalLink className="w-3 h-3 opacity-40" />}
+                  </a>
+                </li>
+              ))}
+              {/* Contact Info */}
+              <li className="pt-2 border-t border-[oklch(0.75_0.12_220/0.1)]">
+                <a
+                  href="mailto:team@icesnowcoin.com"
+                  className="text-sm flex items-center gap-1 hover:text-ice-blue transition-colors font-semibold"
+                  style={{ fontFamily: 'var(--font-sub)', color: '#00d4ff' }}
+                >
+                  📧 team@icesnowcoin.com
+                </a>
+              </li>
             </ul>
           </div>
 
