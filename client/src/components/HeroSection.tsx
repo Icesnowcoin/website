@@ -58,7 +58,7 @@ function CountdownTimer({ targetDate }: { targetDate: Date }) {
 
 export default function HeroSection() {
   const { t } = useLanguage();
-  const presaleDate = new Date('2026-04-20T00:00:00Z');
+  const presaleDate = new Date('2026-04-30T23:59:59Z');
 
   const stats = [
     { label: t('hero.totalSupply'), value: '202,600,000', unit: 'ISC' },
@@ -90,7 +90,7 @@ export default function HeroSection() {
           >
             <Clock className="w-3.5 h-3.5 text-ice-blue" />
             <span className="text-xs font-medium text-ice-blue" style={{ fontFamily: 'var(--font-sub)' }}>
-              {t('hero.presale')} — {t('hero.presaleDate')}
+              Presale Live Now — Ends April 30, 2026
             </span>
           </motion.div>
 

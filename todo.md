@@ -62,3 +62,9 @@
 - [x] 重新创建 DexTradeSection 组件，只包含 12 个 DEX
 - [x] 将 DexTradeSection 集成到主页
 - [x] 发布更新
+
+## 紧急更新 - 预售日期修正
+
+- [x] 更新预售结束日期为 2026-04-30
+- [x] 更新预售徽章文本为 "Presale Live Now — Ends April 30, 2026"
+- [x] 倒计时自动更新为距离 4 月 30 日的剩余时间

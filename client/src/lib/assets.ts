@@ -25,6 +25,7 @@ export const LINKS = {
   game: 'https://icesnowcoin.it.com',
   community: 'https://x.com/i/communities/2035804297032761471',
   twitter: 'https://x.com/IceSnowCoin',
+  telegram: 'https://t.me/IceSnowCoinCommunity',
   pancakeswap: 'https://pancakeswap.finance/swap?outputCurrency=0x11229a3f976566FA8a3ba462C432122f3B8876f6',
   contract: '0x11229a3f976566FA8a3ba462C432122f3B8876f6',
   bscscan: 'https://bscscan.com/token/0x11229a3f976566FA8a3ba462C432122f3B8876f6',
