@@ -99,3 +99,12 @@
 - [x] 定位并修复生产环境浏览器控制台中的 401 资源错误 (OAuth 认证相关，不影响页面)
 - [x] 确认 401 错误不会触发用户可见弹窗
 - [x] 完成生产环境验证清单（首页加载、控制台、核心交互）
+
+
+## 新增功能 - How to Buy 和 FAQ 板块
+
+- [ ] 创建 HowToBuySection 组件 - 3 步购买流程（Ecosystem 下方）
+- [ ] 创建 FAQSection 组件 - 6 个常见问题手风琴（How to Buy 下方）
+- [ ] 将 HowToBuySection 集成到 Home.tsx
+- [ ] 将 FAQSection 集成到 Home.tsx
+- [ ] 验证页面布局和交互

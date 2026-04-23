@@ -16,6 +16,8 @@ import SecurityTransparency from '@/components/SecurityTransparency';
 import RoadmapSection from '@/components/RoadmapSection';
 import VideoSection from '@/components/VideoSection';
 import PriceChart from '@/components/PriceChart';
+import HowToBuySection from '@/components/HowToBuySection';
+import FAQSection from '@/components/FAQSection';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -47,6 +49,10 @@ export default function Home() {
         </div>
         <div className="section-divider" />
         <EcosystemShowcase />
+        <div className="section-divider" />
+        <HowToBuySection />
+        <div className="section-divider" />
+        <FAQSection />
         <div className="section-divider" />
         <SecurityAndGovernance />
         <div className="section-divider" />
