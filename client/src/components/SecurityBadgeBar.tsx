@@ -6,6 +6,9 @@ import { motion } from 'framer-motion';
 import { Lock, Vote, Mail } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
+// Suppress motion.a DOM warning
+motion.a = motion.div as any;
+
 interface Badge {
   icon: React.ReactNode;
   label: string;
@@ -48,23 +51,25 @@ export default function SecurityBadgeBar() {
       <div className="container mx-auto">
         <div className="flex flex-wrap gap-3 justify-center md:justify-start">
           {badges.map((badge, i) => (
-            <motion.a
+            <motion.div
               key={i}
-              href={badge.link}
-              target="_blank"
-              rel="noopener noreferrer"
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="group relative inline-flex items-center gap-2 px-4 py-2.5 rounded-full border transition-all duration-300 hover:border-ice-blue"
-              style={{
-                backgroundColor: 'rgba(0, 212, 255, 0.1)',
-                borderColor: 'rgba(0, 212, 255, 0.3)',
-                color: '#00d4ff',
-              }}
-              title={badge.tooltip}
             >
+              <a
+                href={badge.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-flex items-center gap-2 px-4 py-2.5 rounded-full border transition-all duration-300 hover:border-ice-blue"
+                style={{
+                  backgroundColor: 'rgba(0, 212, 255, 0.1)',
+                  borderColor: 'rgba(0, 212, 255, 0.3)',
+                  color: '#00d4ff',
+                }}
+                title={badge.tooltip}
+              >
               {/* Icon */}
               <div className="flex-shrink-0">{badge.icon}</div>
 
@@ -96,7 +101,8 @@ export default function SecurityBadgeBar() {
                   style={{ borderTopColor: 'rgba(0, 212, 255, 0.3)' }}
                 />
               </div>
-            </motion.a>
+              </a>
+            </motion.div>
           ))}
         </div>
       </div>

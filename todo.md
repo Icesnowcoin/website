@@ -77,3 +77,8 @@
 - [x] 将 SecurityTransparency 集成到 Home.tsx（Contract Info 和 Tokenomics 之间）
 - [x] 更新 Footer 第四列为 Infrastructure，添加完整链接列表和联系信息
 - [ ] 为新组件编写 Vitest 单元测试 (需要配置 jsdom 环境和 @testing-library/react)
+
+
+## Bug 修复
+
+- [x] 修复 SecurityBadgeBar 中的 React DOM 错误 (motion.a 改为 motion.div + 标准 a 标签)
