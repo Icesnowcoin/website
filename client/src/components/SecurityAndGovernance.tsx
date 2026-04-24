@@ -38,11 +38,11 @@ export default function SecurityAndGovernance() {
           {
             icon: Shield,
             label: 'Security Audit',
-            desc: 'Status: In Progress',
+            desc: 'Status: Completed (April 2026)',
             details: [
-              'Contacting: CertiK, HashDit, SlowMist',
-              'Audit reports will be published immediately',
-              'Website will be updated upon completion',
+              'TechRate Audit: 21/21 Security Checks Passed',
+              'Report: github.com/Icesnowcoin/isc-audit-reports',
+              'Website updated with audit results',
             ],
           },
         ],
@@ -102,11 +102,11 @@ export default function SecurityAndGovernance() {
           {
             icon: Shield,
             label: '安全审计',
-            desc: '状态：进行中',
+            desc: '状态：已完成（2026年4月）',
             details: [
-              '联系方：CertiK、HashDit、SlowMist',
-              '审计报告将立即发布',
-              '完成后将更新网站',
+              'TechRate 审计：21/21 安全检查全部通过',
+              '报告：github.com/Icesnowcoin/isc-audit-reports',
+              '网站已更新审计结果',
             ],
           },
         ],

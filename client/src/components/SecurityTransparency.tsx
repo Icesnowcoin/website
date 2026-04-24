@@ -41,7 +41,7 @@ export default function SecurityTransparency() {
     },
     {
       icon: <Hourglass className="w-8 h-8" />,
-      title: 'Team Tokens Vested',
+      title: 'Team Tokens Locked (24-Month Linear Vesting)',
       content: '20% team allocation locked with linear vesting schedule via Team Finance.',
       buttonText: 'View Vesting',
       buttonLink: 'https://app.team.finance/vesting',

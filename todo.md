@@ -108,3 +108,23 @@
 - [ ] 将 HowToBuySection 集成到 Home.tsx
 - [ ] 将 FAQSection 集成到 Home.tsx
 - [ ] 验证页面布局和交互
+
+
+## Footer 重建
+
+- [ ] 重建 Footer 组件，采用 4 列布局（Project、Resources、Community、Contact & Contract）
+- [ ] 添加所有链接和社交媒体
+- [ ] 实现合约地址复制功能
+- [ ] 添加版权和法律链接
+- [ ] 验证所有链接和交互
+
+
+## 紧急修复 - BSCScan 审核关键错误
+
+- [x] 修改 Tokenomics 板块：审计公司从"CertiK 和 OpenZeppelin"改为"TechRate（2026年4月完成，21项安全检查全部通过）"
+- [x] 修改 Security & Governance 中的安全审计卡片状态为"已完成（2026年4月）"并添加报告下载链接
+- [x] 修改 Security & Transparency 中的团队代币卡片标题为"团队代币已锁定（24个月线性归属）"
+- [x] 页脚添加 Telegram 链接
+- [x] 页脚添加 GitHub 链接
+- [x] 页脚添加风险披露声明
+- [ ] 验证英文版本内容完整性
