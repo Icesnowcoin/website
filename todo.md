@@ -103,11 +103,11 @@
 
 ## 新增功能 - How to Buy 和 FAQ 板块
 
-- [ ] 创建 HowToBuySection 组件 - 3 步购买流程（Ecosystem 下方）
-- [ ] 创建 FAQSection 组件 - 6 个常见问题手风琴（How to Buy 下方）
-- [ ] 将 HowToBuySection 集成到 Home.tsx
-- [ ] 将 FAQSection 集成到 Home.tsx
-- [ ] 验证页面布局和交互
+- [x] 创建 HowToBuySection 组件 - 3 步购买流程（Ecosystem 下方）
+- [x] 创建 FAQSection 组件 - 6 个常见问题手风琴（How to Buy 下方）
+- [x] 将 HowToBuySection 集成到 Home.tsx
+- [x] 将 FAQSection 集成到 Home.tsx
+- [x] 验证页面布局和交互
 
 
 ## Footer 重建
@@ -128,3 +128,13 @@
 - [x] 页脚添加 GitHub 链接
 - [x] 页脚添加风险披露声明
 - [ ] 验证英文版本内容完整性
+
+
+## 整体多语言系统修复
+
+- [x] 修复 HowToBuySection 和 FAQSection 中的翻译键
+- [x] 修复 DexTradeSection 中的翻译键
+- [x] 修复 SecurityTransparency 中的翻译键
+- [x] 修复 Footer 中的翻译键（Project、Resources、Community、Contact & Contract、Privacy Policy、Terms of Service、Copyright、Risk Disclaimer）
+- [x] 验证所有语言切换功能正常工作（中文、英文、越南文）
+- [x] 编写整体多语言系统的单元测试
