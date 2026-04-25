@@ -14,8 +14,7 @@ import EcosystemShowcase from '@/components/EcosystemShowcase';
 import SecurityAndGovernance from '@/components/SecurityAndGovernance';
 import SecurityTransparency from '@/components/SecurityTransparency';
 import RoadmapSection from '@/components/RoadmapSection';
-import VideoSection from '@/components/VideoSection';
-import PriceChart from '@/components/PriceChart';
+
 import HowToBuySection from '@/components/HowToBuySection';
 import FAQSection from '@/components/FAQSection';
 import Footer from '@/components/Footer';
@@ -44,10 +43,6 @@ export default function Home() {
         <div className="section-divider" />
         <SecurityTransparency />
         <div className="section-divider" />
-        <div className="section-container py-20">
-          <PriceChart />
-        </div>
-        <div className="section-divider" />
         <EcosystemShowcase />
         <div className="section-divider" />
         <HowToBuySection />
@@ -57,8 +52,6 @@ export default function Home() {
         <SecurityAndGovernance />
         <div className="section-divider" />
         <RoadmapSection />
-        <div className="section-divider" />
-        <VideoSection />
       </main>
 
       {/* Footer */}
