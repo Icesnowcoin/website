@@ -7,42 +7,44 @@ import { motion } from 'framer-motion';
 import { Wallet, ArrowRightLeft, Snowflake, Copy, Check } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const CONTRACT_ADDRESS = '0x11229a3f976566FA8a3ba462C432122f3B8876f6';
 const PANCAKESWAP_URL = `https://pancakeswap.finance/swap?outputCurrency=${CONTRACT_ADDRESS}`;
 
-const steps = [
-  {
-    number: '01',
-    icon: Wallet,
-    title: 'Connect Your Wallet',
-    description: 'Install MetaMask or Trust Wallet. Switch network to BNB Smart Chain (BSC).',
-    hint: 'Need BNB for gas fees',
-  },
-  {
-    number: '02',
-    icon: ArrowRightLeft,
-    title: 'Swap BNB for ISC',
-    description: 'Visit PancakeSwap, connect your wallet, and swap BNB for ISC using the verified contract address.',
-    button: {
-      text: 'Go to PancakeSwap',
-      link: PANCAKESWAP_URL,
-    },
-  },
-  {
-    number: '03',
-    icon: Snowflake,
-    title: 'Add ISC to Wallet',
-    description: "Import token with contract address to see your balance. You're ready to hold, stake, or trade!",
-    button: {
-      text: 'Copy Contract Address',
-      isCopy: true,
-    },
-  },
-];
-
 export default function HowToBuySection() {
+  const { t } = useLanguage();
   const [copied, setCopied] = useState(false);
+
+  const steps = [
+    {
+      number: '01',
+      icon: Wallet,
+      title: t('howToBuy.step1.title'),
+      description: t('howToBuy.step1.desc'),
+      hint: t('howToBuy.step1.hint'),
+    },
+    {
+      number: '02',
+      icon: ArrowRightLeft,
+      title: t('howToBuy.step2.title'),
+      description: t('howToBuy.step2.desc'),
+      button: {
+        text: t('howToBuy.step2.button'),
+        link: PANCAKESWAP_URL,
+      },
+    },
+    {
+      number: '03',
+      icon: Snowflake,
+      title: t('howToBuy.step3.title'),
+      description: t('howToBuy.step3.desc'),
+      button: {
+        text: t('howToBuy.step3.button'),
+        isCopy: true,
+      },
+    },
+  ];
 
   const handleCopy = () => {
     navigator.clipboard.writeText(CONTRACT_ADDRESS);
@@ -85,10 +87,10 @@ export default function HowToBuySection() {
           transition={{ duration: 0.6, type: 'tween' }}
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
-            How to Buy ISC
+            {t('howToBuy.title')}
           </h2>
           <p className="text-lg text-muted-foreground">
-            Get started with Ice Snow Coin in 3 simple steps
+            {t('howToBuy.subtitle')}
           </p>
         </motion.div>
 
@@ -158,7 +160,7 @@ export default function HowToBuySection() {
                             {copied ? (
                               <>
                                 <Check className="w-4 h-4 mr-2" />
-                                Copied!
+                                {t('howToBuy.step3.button')} - Copied!
                               </>
                             ) : (
                               <>
@@ -188,9 +190,8 @@ export default function HowToBuySection() {
           transition={{ duration: 0.6, delay: 0.6 }}
         >
           <p className="text-amber-100 text-sm md:text-base">
-            ⚠️ <span className="font-semibold">Always verify the contract address:</span>{' '}
+            ⚠️ <span className="font-semibold">{t('howToBuy.securityTip')}</span>{' '}
             <span className="font-mono text-amber-300">{CONTRACT_ADDRESS}</span>
-            {' '}Only trust official links from icesnowcoin.com.
           </p>
         </motion.div>
       </div>

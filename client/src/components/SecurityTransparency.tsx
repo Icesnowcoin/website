@@ -20,30 +20,30 @@ export default function SecurityTransparency() {
   const cards: SecurityCard[] = [
     {
       icon: <Shield className="w-8 h-8" />,
-      title: 'Verified Smart Contract',
-      content: 'Full source code verified on BscScan. EIP-1967 UUPS Proxy pattern.',
-      buttonText: 'View Code',
+      title: t('security.card1.title'),
+      content: t('security.card1.desc'),
+      buttonText: t('security.card1.button'),
       buttonLink: 'https://bscscan.com/address/0xf74f38cb35255b85514c49255f0ea29a013cb618#code',
     },
     {
       icon: <Flame className="w-8 h-8" />,
-      title: 'Ownership Renounced',
-      content: 'Admin keys destroyed. No minting, no freezing, no hidden functions.',
-      buttonText: 'Verify',
+      title: t('security.card2.title'),
+      content: t('security.card2.desc'),
+      buttonText: t('security.card2.button'),
       buttonLink: 'https://bscscan.com/address/0x11229a3f976566FA8a3ba462C432122f3B8876f6#readProxyContract',
     },
     {
       icon: <Lock className="w-8 h-8" />,
-      title: 'LP Locked 3 Years 11 Months',
-      content: '70,684,800 ISC + USDT locked on UNCX Network. Unlock date: 2030.',
-      buttonText: 'View Lock',
+      title: t('security.card3.title'),
+      content: t('security.card3.desc'),
+      buttonText: t('security.card3.button'),
       buttonLink: 'https://app.uncx.network/lockers/manage/lockers-v3?service=edit&wallet=0xf946A6521D201F2C757562Add139E5635e2a80b3&chain=56',
     },
     {
       icon: <Hourglass className="w-8 h-8" />,
-      title: 'Team Tokens Locked (24-Month Linear Vesting)',
-      content: '20% team allocation locked with linear vesting schedule via Team Finance.',
-      buttonText: 'View Vesting',
+      title: t('security.card4.title'),
+      content: t('security.card4.desc'),
+      buttonText: t('security.card4.button'),
       buttonLink: 'https://app.team.finance/vesting',
     },
   ];
@@ -70,13 +70,13 @@ export default function SecurityTransparency() {
             className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4"
             style={{ fontFamily: 'var(--font-heading)', color: 'oklch(0.90 0.03 220)' }}
           >
-            Security & Transparency
+            {t('security.title')}
           </h2>
           <p
             className="text-lg sm:text-xl max-w-2xl mx-auto"
             style={{ fontFamily: 'var(--font-body)', color: 'oklch(0.70 0.02 220)' }}
           >
-            Multiple layers of protection for the community
+            {t('security.subtitle')}
           </p>
           <div className="mt-4 mx-auto h-[1px] w-24 bg-gradient-to-r from-transparent via-ice-blue to-transparent" />
         </motion.div>
@@ -152,7 +152,7 @@ export default function SecurityTransparency() {
             className="text-base sm:text-lg font-bold text-white"
             style={{ fontFamily: 'var(--font-heading)' }}
           >
-            🛡️ Contract ownership renounced. Liquidity locked 4 years. Team tokens vested. Community governed.
+            {t('security.banner')}
           </p>
         </motion.div>
       </div>

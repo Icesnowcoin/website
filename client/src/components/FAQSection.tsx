@@ -6,41 +6,43 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronDown } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 interface FAQItem {
   question: string;
   answer: string;
 }
 
-const faqItems: FAQItem[] = [
-  {
-    question: 'What is Ice Snow Coin (ISC)?',
-    answer: 'ISC is a BEP-20 utility token on BNB Smart Chain, powering an AI-driven GameFi and NFT ecosystem. It features staking rewards (5-15% APY), NFT minting, and real-world asset (RWA) integration.',
-  },
-  {
-    question: 'Is the contract safe? Has it been audited?',
-    answer: 'The ISC contract is fully verified on BscScan with open-source MIT-licensed code. Contract ownership has been renounced, meaning no one can mint new tokens or modify the contract. A professional third-party security audit is currently in progress.',
-  },
-  {
-    question: 'How do I stake ISC and earn rewards?',
-    answer: 'You can stake ISC through our official staking portal or partner DeFi platforms. APY ranges from 5% to 15% depending on lock-up duration. Rewards are distributed automatically via smart contract.',
-  },
-  {
-    question: 'What is the total supply? Can more tokens be created?',
-    answer: 'Total supply is fixed at 202,600,000 ISC. No additional tokens can ever be minted because the contract ownership has been renounced and there is no accessible minting function.',
-  },
-  {
-    question: 'What makes ISC different from other tokens?',
-    answer: 'ISC combines AI-powered GameFi mechanics, NFT utility, and real-world asset backing. Unlike pure meme tokens, ISC has a sustainable economic model with staking, burning mechanisms, and ecosystem partnerships.',
-  },
-  {
-    question: 'Where can I trade ISC?',
-    answer: 'ISC is available on PancakeSwap (BSC). Always use the verified contract address: 0x11229a3f976566FA8a3ba462C432122f3B8876f6.',
-  },
-];
-
 export default function FAQSection() {
+  const { t } = useLanguage();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const faqItems: FAQItem[] = [
+    {
+      question: t('faq.q1'),
+      answer: t('faq.a1'),
+    },
+    {
+      question: t('faq.q2'),
+      answer: t('faq.a2'),
+    },
+    {
+      question: t('faq.q3'),
+      answer: t('faq.a3'),
+    },
+    {
+      question: t('faq.q4'),
+      answer: t('faq.a4'),
+    },
+    {
+      question: t('faq.q5'),
+      answer: t('faq.a5'),
+    },
+    {
+      question: t('faq.q6'),
+      answer: t('faq.a6'),
+    },
+  ];
 
   const toggleAccordion = (index: number) => {
     setOpenIndex(openIndex === index ? null : index);
@@ -61,10 +63,10 @@ export default function FAQSection() {
           transition={{ duration: 0.6, type: 'tween' }}
         >
           <h2 className="text-4xl md:text-5xl font-bold mb-4 text-foreground">
-            Frequently Asked Questions
+            {t('faq.title')}
           </h2>
           <p className="text-lg text-muted-foreground">
-            Everything you need to know about ISC
+            {t('faq.subtitle')}
           </p>
         </motion.div>
 
