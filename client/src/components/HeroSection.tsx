@@ -81,16 +81,16 @@ export default function HeroSection() {
 
       <div className="relative z-10 container mx-auto py-16 sm:py-24">
         <div className="max-w-3xl">
-          {/* Presale Badge */}
+          {/* Live Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-[oklch(0.75_0.12_220/0.3)] bg-[oklch(0.75_0.12_220/0.08)] mb-6"
           >
-            <Clock className="w-3.5 h-3.5 text-ice-blue" />
+            <Zap className="w-3.5 h-3.5 text-ice-blue" />
             <span className="text-xs font-medium text-ice-blue" style={{ fontFamily: 'var(--font-sub)' }}>
-              Presale Live Now — Ends April 30, 2026
+              {t('hero.liveOnBsc')}
             </span>
           </motion.div>
 
@@ -176,7 +176,7 @@ export default function HeroSection() {
               style={{ fontFamily: 'var(--font-heading)' }}
             >
               <Zap className="w-4 h-4" />
-              {t('hero.buyNow')}
+              {t('hero.tradeNow')}
             </a>
             <a
               href="#about"

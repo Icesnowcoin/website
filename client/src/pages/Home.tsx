@@ -9,7 +9,7 @@ import SecurityBadgeBar from '@/components/SecurityBadgeBar';
 import CommunitySection from '@/components/CommunitySection';
 import AboutSection from '@/components/AboutSection';
 import TokenomicsSection from '@/components/TokenomicsSection';
-import DexTradeSection from '@/components/DexTradeSection';
+
 import EcosystemShowcase from '@/components/EcosystemShowcase';
 import SecurityAndGovernance from '@/components/SecurityAndGovernance';
 import SecurityTransparency from '@/components/SecurityTransparency';
@@ -34,8 +34,6 @@ export default function Home() {
         <SecurityBadgeBar />
         <div className="section-divider" />
         <CommunitySection />
-        <div className="section-divider" />
-        <DexTradeSection />
         <div className="section-divider" />
         <AboutSection />
         <div className="section-divider" />

@@ -3,7 +3,7 @@
  * Horizontal badge buttons below Hero section
  */
 import { motion } from 'framer-motion';
-import { Lock, Vote, Mail } from 'lucide-react';
+import { Lock, Vote } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 interface Badge {
@@ -28,12 +28,6 @@ export default function SecurityBadgeBar() {
       label: 'DAO Governance',
       link: 'https://snapshot.org/#/icesnowcoin.eth',
       tooltip: 'Community-driven decisions via Snapshot',
-    },
-    {
-      icon: <Mail className="w-5 h-5" />,
-      label: 'team@icesnowcoin.com',
-      link: 'mailto:team@icesnowcoin.com',
-      tooltip: 'Official business inquiries',
     },
   ];
 

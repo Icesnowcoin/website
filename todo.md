@@ -146,3 +146,15 @@
 - [x] 删除多余的加密货币价格板块（删除 PriceChart 组件）
 - [x] 验证页面布局连贯无缝隙
 - [x] 验证多语言功能不受影响
+
+
+## 去中心化叙事一致性优化
+
+- [ ] 优化 Presale 板块 - 替换为 "Trade on PancakeSwap"
+- [ ] 删除官方邮箱 team@icesnowcoin.com
+- [ ] 添加 Snapshot DAO 治理链接按钮
+- [ ] 修改 Tokenomics 文案 - "Team Holdings" 改为 "Core Contributor Allocation"
+- [ ] 修改 Tokenomics 文案 - 删除 "marketing" 改为 "R&D, operations, airdrops, ecosystem growth"
+- [ ] 删除首页 DEX 交易板块
+- [ ] 验证所有修改后的页面显示正常
+- [ ] 验证多语言功能不受影响
