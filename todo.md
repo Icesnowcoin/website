@@ -158,3 +158,20 @@
 - [x] 删除首页 DEX 交易板块
 - [x] 验证所有修改后的页面显示正常
 - [x] 验证多语言功能不受影响
+
+
+## 最终修复清单 - 部署前必须完成
+
+- [x] 修复 Roadmap Q2 审计状态 - 已通过 TechRate 审计，21 项安全检查全部通过
+- [x] 删除 Roadmap 中的"代币上市申请"
+- [x] 删除 HowToBuySection 中的 Step 03 板块
+- [x] 修改 Step 02 为 USDT 路径 - "前往 PancakeSwap，将 USDT 交换为 ISC"
+- [x] 修改社区板块文案为社区治理 - "参与 Snapshot 投票，决定 ISC 的未来"
+- [x] 修复所有 JavaScript 错误 - 页面编译无错误
+- [x] 验证 Presale 已替换为 "ISC is Live on BSC"
+- [x] 验证 DEX 板块已删除
+- [x] 验证加密货币价格板块已删除
+- [x] 验证社区招募视频无重复
+- [x] 验证多语言切换正常
+- [x] 删除 Footer 中的官方邮箱
+- [x] 修改 Tokenomics 表格分类，删除 Marketing 改为 R&D
