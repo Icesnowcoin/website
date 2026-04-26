@@ -74,10 +74,10 @@ export default function CommunitySection() {
     },
     {
       icon: <Gift className="w-6 h-6" />,
-      title: t('community.feature3') || '独家福利',
-      desc: t('community.feature3Desc') || '获取社区专属奖励',
-      link: null,
-      isClickable: false,
+      title: t('community.feature3') || '社区治理',
+      desc: t('community.feature3Desc') || '参与 Snapshot 投票，决定 ISC 的未来',
+      link: 'https://snapshot.org/#/s:icesnowcoin.eth',
+      isClickable: true,
     },
   ];
 

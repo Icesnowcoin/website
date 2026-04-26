@@ -4,7 +4,7 @@
  */
 
 import { motion } from 'framer-motion';
-import { Wallet, ArrowRightLeft, Snowflake, Copy, Check } from 'lucide-react';
+import { Wallet, ArrowRightLeft } from 'lucide-react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -14,7 +14,6 @@ const PANCAKESWAP_URL = `https://pancakeswap.finance/swap?outputCurrency=${CONTR
 
 export default function HowToBuySection() {
   const { t } = useLanguage();
-  const [copied, setCopied] = useState(false);
 
   const steps = [
     {
@@ -34,23 +33,7 @@ export default function HowToBuySection() {
         link: PANCAKESWAP_URL,
       },
     },
-    {
-      number: '03',
-      icon: Snowflake,
-      title: t('howToBuy.step3.title'),
-      description: t('howToBuy.step3.desc'),
-      button: {
-        text: t('howToBuy.step3.button'),
-        isCopy: true,
-      },
-    },
   ];
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(CONTRACT_ADDRESS);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -146,32 +129,10 @@ export default function HowToBuySection() {
                     {/* Button */}
                     {step.button && (
                       <Button
-                        onClick={() => {
-                          if (step.button.isCopy) {
-                            handleCopy();
-                          } else {
-                            window.open(step.button.link, '_blank');
-                          }
-                        }}
+                        onClick={() => window.open(step.button.link, '_blank')}
                         className="w-full bg-gradient-to-r from-cyan-400 to-purple-500 hover:from-cyan-300 hover:to-purple-400 text-white font-semibold rounded-lg transition-all duration-300"
                       >
-                        {step.button.isCopy ? (
-                          <>
-                            {copied ? (
-                              <>
-                                <Check className="w-4 h-4 mr-2" />
-                                {t('howToBuy.step3.button')} - Copied!
-                              </>
-                            ) : (
-                              <>
-                                <Copy className="w-4 h-4 mr-2" />
-                                {step.button.text}
-                              </>
-                            )}
-                          </>
-                        ) : (
-                          step.button.text
-                        )}
+                        {step.button.text}
                       </Button>
                     )}
                   </div>

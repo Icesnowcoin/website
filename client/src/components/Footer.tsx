@@ -122,16 +122,6 @@ export default function Footer() {
               </h4>
 
               <div className="space-y-4">
-                {/* Email */}
-                <div>
-                  <a
-                    href="mailto:team@icesnowcoin.com"
-                    className="text-cyan-400 hover:text-cyan-300 transition-colors duration-300 text-sm font-semibold flex items-center gap-2"
-                  >
-                    📧 team@icesnowcoin.com
-                  </a>
-                </div>
-
                 {/* Contract Address */}
                 <div>
                   <p className="text-[#8892b0] text-xs mb-2">{t('footer.contractAddress')}</p>

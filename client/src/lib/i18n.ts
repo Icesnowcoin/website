@@ -96,12 +96,10 @@ export const translations: Record<Locale, Record<string, string>> = {
     'howToBuy.step1.title': '连接您的钱包',
     'howToBuy.step1.desc': '安装 MetaMask 或 Trust Wallet。将网络切换到 BNB 智能链 (BSC)。',
     'howToBuy.step1.hint': '需要 BNB 支付 Gas 费用',
-    'howToBuy.step2.title': '将 BNB 交换为 ISC',
-    'howToBuy.step2.desc': '访问 PancakeSwap，连接您的钱包，使用验证的合约地址将 BNB 交换为 ISC。',
+    'howToBuy.step2.title': '获取 ISC',
+    'howToBuy.step2.desc': '前往 PancakeSwap，将 USDT 交换为 ISC',
     'howToBuy.step2.button': '前往 PancakeSwap',
-    'howToBuy.step3.title': '将 ISC 添加到钱包',
-    'howToBuy.step3.desc': '使用合约地址导入代币以查看您的余额。您已准备好持有、质押或交易！',
-    'howToBuy.step3.button': '复制合约地址',
+
     'howToBuy.securityTip': '安全提示：始终验证合约地址并从官方链接交易',
 
     // FAQ
