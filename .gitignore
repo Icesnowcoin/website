@@ -111,3 +111,23 @@ temp/
 
 # Manus version file (auto-generated, not part of source)
 client/public/__manus__/version.json
+
+# Sensitive files
+*.key
+*.pem
+*.p12
+*.pfx
+*secret*
+*password*
+
+# Manus logs
+.manus-logs/
+
+# IDE
+.vscode/settings.json
+.idea/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
