@@ -197,6 +197,16 @@ export default function HeroSection() {
               Whitepaper v3.0
               <ArrowRight className="w-4 h-4" />
             </a>
+            <a
+              href="https://t.me/IceSnowCoin"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-[oklch(0.75_0.12_220/0.3)] text-ice-blue font-medium text-sm hover:bg-[oklch(0.75_0.12_220/0.1)] transition-all duration-300"
+              style={{ fontFamily: 'var(--font-heading)' }}
+            >
+              Join Community
+              <ArrowRight className="w-4 h-4" />
+            </a>
           </motion.div>
 
           {/* Stats */}

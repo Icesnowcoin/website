@@ -4,7 +4,7 @@
  */
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Globe, ExternalLink, ChevronDown } from 'lucide-react';
+import { Menu, X, Globe, ExternalLink, ChevronDown, Twitter, MessageCircle, Github } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { type Locale, LOCALE_NAMES } from '@/lib/i18n';
 import { ASSETS, LINKS } from '@/lib/assets';
@@ -69,6 +69,19 @@ export default function Navbar() {
                 {item.external && <ExternalLink className="w-3 h-3 opacity-50" />}
               </a>
             ))}
+          </div>
+
+          {/* Social Icons */}
+          <div className="hidden md:flex items-center gap-2">
+            <a href="https://x.com/IceSnowCoin" target="_blank" rel="noopener noreferrer" className="p-2 text-[oklch(0.75_0.02_220)] hover:text-ice-blue transition-colors" title="X (Twitter)">
+              <Twitter className="w-4 h-4" />
+            </a>
+            <a href="https://t.me/IceSnowCoin" target="_blank" rel="noopener noreferrer" className="p-2 text-[oklch(0.75_0.02_220)] hover:text-ice-blue transition-colors" title="Telegram">
+              <MessageCircle className="w-4 h-4" />
+            </a>
+            <a href="https://github.com/Icesnowcoin" target="_blank" rel="noopener noreferrer" className="p-2 text-[oklch(0.75_0.02_220)] hover:text-ice-blue transition-colors" title="GitHub">
+              <Github className="w-4 h-4" />
+            </a>
           </div>
 
           {/* Right Actions */}

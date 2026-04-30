@@ -15,7 +15,7 @@ interface FAQItem {
 
 export default function FAQSection() {
   const { t } = useLanguage();
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0); // 默认展开第一项
 
   const faqItems: FAQItem[] = [
     {

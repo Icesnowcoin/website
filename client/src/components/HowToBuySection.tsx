@@ -10,7 +10,8 @@ import { Button } from '@/components/ui/button';
 import { useLanguage } from '@/contexts/LanguageContext';
 
 const CONTRACT_ADDRESS = '0x11229a3f976566FA8a3ba462C432122f3B8876f6';
-const PANCAKESWAP_URL = `https://pancakeswap.finance/swap?outputCurrency=${CONTRACT_ADDRESS}`;
+const USDT_ADDRESS = '0x55d398326f99059fF775485246999027B3197955'; // USDT on BSC
+const PANCAKESWAP_URL = `https://pancakeswap.finance/swap?inputCurrency=${USDT_ADDRESS}&outputCurrency=${CONTRACT_ADDRESS}`;
 
 export default function HowToBuySection() {
   const { t } = useLanguage();

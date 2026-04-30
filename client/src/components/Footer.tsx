@@ -193,6 +193,12 @@ export default function Footer() {
             >
               {t('footer.termsOfService')}
             </a>
+            <span className="text-white/10">|</span>
+            <div className="flex items-center gap-3">
+              <a href="https://x.com/IceSnowCoin" target="_blank" rel="noopener noreferrer" className="text-[#8892b0] hover:text-cyan-400 transition-colors duration-300">X</a>
+              <a href="https://t.me/IceSnowCoin" target="_blank" rel="noopener noreferrer" className="text-[#8892b0] hover:text-cyan-400 transition-colors duration-300">Telegram</a>
+              <a href="https://github.com/Icesnowcoin" target="_blank" rel="noopener noreferrer" className="text-[#8892b0] hover:text-cyan-400 transition-colors duration-300">GitHub</a>
+            </div>
           </div>
         </motion.div>
       </div>
