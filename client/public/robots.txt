@@ -1,3 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /admin
+Disallow: /.git
+Disallow: /node_modules
+
 Sitemap: https://icesnowcoin.com/sitemap.xml

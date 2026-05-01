@@ -9,14 +9,17 @@ import { LanguageProvider } from "./contexts/LanguageContext";
 import { useAuth } from "./_core/hooks/useAuth";
 import { getLoginUrl } from "./const";
 import Home from "./pages/Home";
-import AdminDashboard from "./pages/AdminDashboard";
+import Stake from "./pages/Stake";
+import Whitepaper from "./pages/Whitepaper";
+
 
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path="/" component={Home} />
-      <Route path="/admin" component={AdminDashboard} />
+      <Route path="/stake" component={Stake} />
+      <Route path="/whitepaper" component={Whitepaper} />
       <Route path="/404" component={NotFound} />
       {/* Final fallback route */}
       <Route component={NotFound} />
